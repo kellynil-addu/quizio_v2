@@ -1,0 +1,115 @@
+package com.dak.models;
+
+import com.dak.db.Database;
+import com.dak.db.QuizTable;
+import com.dak.exceptions.DatabaseReadException;
+import com.dak.exceptions.DatabaseWriteException;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.sql.*;
+import java.time.Instant;
+import java.util.UUID;
+
+public class Quiz {
+    private final UUID id;
+    private final Instant createdAt;
+    private final Instant updatedAt;
+
+    private String title;
+    private String creator;
+
+    public Quiz(UUID id, Instant createdAt, Instant updatedAt, String title, String creator) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+
+        this.title = title;
+        this.creator = creator;
+    }
+
+    public UUID getId() {
+        return this.id;
+    }
+
+    public Instant getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public Instant getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setTitle(String newValue) {
+        this.title = newValue;
+    }
+
+    public String getCreator() {
+        return this.creator;
+    }
+
+    public void setCreator(String newValue) {
+        this.creator = newValue;
+    }
+
+    public void save() {
+        String query = String.format(
+            "INSERT INTO quiz (%s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?)",
+            QuizTable.ID,
+            QuizTable.CREATED_AT,
+            QuizTable.UPDATED_AT,
+            QuizTable.TITLE,
+            QuizTable.CREATOR
+        );
+
+        try (
+            Connection connection = Database.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            preparedStatement.setString(1, this.id.toString());
+            preparedStatement.setTimestamp(2, Timestamp.from(this.createdAt));
+            preparedStatement.setTimestamp(3, Timestamp.from(this.updatedAt));
+            preparedStatement.setString(4, this.title);
+            preparedStatement.setString(5, this.creator);
+            preparedStatement.executeUpdate();
+        } catch (SQLException error) {
+            throw new DatabaseWriteException(error.getMessage());
+        }
+    }
+    @Contract("_, _ -> new")
+    public static @NotNull Quiz create(String title, String creator) {
+        return new Quiz(UUID.randomUUID(), Instant.now(), Instant.now(), title, creator);
+    }
+
+    public static @Nullable Quiz findById(String id) {
+        String query = String.format("SELECT * FROM %s WHERE id = ?", QuizTable.NAME);
+
+        try (
+            Connection connection = Database.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement(query)
+        ) {
+            preparedStatement.setString(1, id);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID));
+                Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant();
+                Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant();
+                String title = resultSet.getString(QuizTable.TITLE);
+                String creator = resultSet.getString(QuizTable.CREATOR);
+
+                return new Quiz(rsId, createdAt, updatedAt, title, creator);
+            } else {
+                return null;
+            }
+        } catch (SQLException error) {
+            throw new DatabaseReadException(error.getMessage());
+        }
+    }
+}
