@@ -1,7 +1,7 @@
 package com.dak.models;
 
 import com.dak.db.Database;
-import com.dak.db.QuizTable;
+import com.dak.db.tables.QuizTable;
 import com.dak.exceptions.DatabaseReadException;
 import com.dak.exceptions.DatabaseWriteException;
 import org.jetbrains.annotations.Contract;
@@ -12,7 +12,7 @@ import java.sql.*;
 import java.time.Instant;
 import java.util.UUID;
 
-public class Quiz {
+public class QuizModel {
     private final UUID id;
     private final Instant createdAt;
     private final Instant updatedAt;
@@ -20,7 +20,7 @@ public class Quiz {
     private String title;
     private String creator;
 
-    public Quiz(UUID id, Instant createdAt, Instant updatedAt, String title, String creator) {
+    public QuizModel(UUID id, Instant createdAt, Instant updatedAt, String title, String creator) {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -82,11 +82,11 @@ public class Quiz {
         }
     }
     @Contract("_, _ -> new")
-    public static @NotNull Quiz create(String title, String creator) {
-        return new Quiz(UUID.randomUUID(), Instant.now(), Instant.now(), title, creator);
+    public static @NotNull QuizModel create(String title, String creator) {
+        return new QuizModel(UUID.randomUUID(), Instant.now(), Instant.now(), title, creator);
     }
 
-    public static @Nullable Quiz findById(String id) {
+    public static @Nullable QuizModel findById(String id) {
         String query = String.format("SELECT * FROM %s WHERE id = ?", QuizTable.NAME);
 
         try (
@@ -104,7 +104,7 @@ public class Quiz {
                 String title = resultSet.getString(QuizTable.TITLE);
                 String creator = resultSet.getString(QuizTable.CREATOR);
 
-                return new Quiz(rsId, createdAt, updatedAt, title, creator);
+                return new QuizModel(rsId, createdAt, updatedAt, title, creator);
             } else {
                 return null;
             }

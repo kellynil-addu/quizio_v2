@@ -1,4 +1,4 @@
-package com.dak.db;
+package com.dak.db.tables;
 
 public class QuizTable {
     public static final String NAME = "quiz";
