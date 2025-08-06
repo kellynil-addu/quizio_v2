@@ -60,11 +60,11 @@ public class QuizModel {
     public void save() {
         String query = String.format(
             "INSERT INTO quiz (%s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?)",
-            QuizTable.ID,
-            QuizTable.CREATED_AT,
-            QuizTable.UPDATED_AT,
-            QuizTable.TITLE,
-            QuizTable.CREATOR
+            QuizTable.ID_COLUMN,
+            QuizTable.CREATED_AT_COLUMN,
+            QuizTable.UPDATED_AT_COLUMN,
+            QuizTable.TITLE_COLUMN,
+            QuizTable.CREATOR_COLUMN
         );
 
         try (
@@ -98,11 +98,11 @@ public class QuizModel {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID));
-                Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant();
-                Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant();
-                String title = resultSet.getString(QuizTable.TITLE);
-                String creator = resultSet.getString(QuizTable.CREATOR);
+                UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID_COLUMN));
+                Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT_COLUMN).toInstant();
+                Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT_COLUMN).toInstant();
+                String title = resultSet.getString(QuizTable.TITLE_COLUMN);
+                String creator = resultSet.getString(QuizTable.CREATOR_COLUMN);
 
                 return new QuizModel(rsId, createdAt, updatedAt, title, creator);
             } else {
