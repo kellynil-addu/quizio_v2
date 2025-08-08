@@ -1,6 +1,5 @@
 package com.dak;
 
-import com.dak.db.Migrator;
 import com.dak.views.NewReleaseSection;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
