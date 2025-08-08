@@ -1,9 +1,9 @@
 package com.dak.views.utils;
 
 public class SizeSet {
-    public static int XL = 16;
-    public static int L = 14;
-    public static int BASE = 12;
-    public static int S = 10;
-    public static int XS = 8;
+    public static final int XL = 16;
+    public static final int L = 14;
+    public static final int BASE = 12;
+    public static final int S = 10;
+    public static final int XS = 8;
 }
