@@ -1,5 +1,6 @@
 package com.dak;
 
+import com.dak.db.Migrator;
 import com.dak.views.NewReleaseSection;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
@@ -17,6 +18,7 @@ public class Main {
 
         frame.add(new NewReleaseSection());
         frame.setSize(1024, 762);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
