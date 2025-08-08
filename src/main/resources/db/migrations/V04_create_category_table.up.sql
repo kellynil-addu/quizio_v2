@@ -1,0 +1,5 @@
+CREATE TABLE `category` (
+    `id` CHAR(36) PRIMARY KEY,
+    `name` VARCHAR(36) UNIQUE NOT NULL,
+    `image` VARCHAR(255) UNIQUE NOT NULL
+);
