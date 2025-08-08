@@ -7,10 +7,10 @@ public class QuestionModel {
     private final UUID quizId;
     private final UUID answerId;
 
-    private OPTION_TYPE type;
+    private TYPE type;
     private String text;
 
-    public static enum OPTION_TYPE {
+    public static enum TYPE {
         FILL_IN_THE_BLANK,
         MULTI_SELECT,
         MULTIPLE_CHOICE,
@@ -18,7 +18,7 @@ public class QuestionModel {
         TRUE_OR_FALSE
     }
 
-    public QuestionModel(UUID id, UUID quizId, UUID answerId, OPTION_TYPE type, String text) {
+    public QuestionModel(UUID id, UUID quizId, UUID answerId, TYPE type, String text) {
         this.id = id;
         this.quizId = quizId;
         this.answerId = answerId;
@@ -38,7 +38,7 @@ public class QuestionModel {
         return answerId;
     }
 
-    public OPTION_TYPE getType() {
+    public TYPE getType() {
         return type;
     }
 
