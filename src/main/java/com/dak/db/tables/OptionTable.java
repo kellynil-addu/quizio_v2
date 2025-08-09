@@ -1,9 +1,11 @@
 package com.dak.db.tables;
 
 public class OptionTable {
-    public static final String NAME = "option";
-    public static final String ID_COLUMN = "id";
-    public static final String QUESTION_ID_COLUMN = "question_id";
-    public static final String TEXT_COLUMN = "text";
-    public static final String IS_CORRECT_COLUMN = "is_correct";
+    public static final String TABLE_NAME = "option";
+
+    public static final String ID = "id";
+    public static final String QUESTION_ID = "question_id";
+    public static final String IS_CORRECT = "is_correct";
+    public static final String PLACE = "place";
+    public static final String TEXT = "text";
 }

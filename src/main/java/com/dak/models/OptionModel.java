@@ -6,9 +6,9 @@ public class OptionModel {
     private final UUID id;
     private final UUID questionId;
 
+    private boolean isCorrect;
     private PLACE place;
     private String text;
-    private boolean isCorrect;
 
     public static enum PLACE {
         A,
@@ -33,15 +33,15 @@ public class OptionModel {
         return questionId;
     }
 
+    public boolean isCorrect() {
+        return isCorrect;
+    }
+
     public PLACE getPlace() {
         return place;
     }
 
     public String getText() {
         return text;
-    }
-
-    public boolean isCorrect() {
-        return isCorrect;
     }
 }

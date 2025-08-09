@@ -20,7 +20,7 @@ public class QuizModel {
     private String title;
     private String creator;
 
-    public QuizModel(UUID id, Instant createdAt, Instant updatedAt, String title, String creator) {
+    public QuizModel(UUID id, String title, String creator, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -60,11 +60,11 @@ public class QuizModel {
     public void save() {
         String query = String.format(
             "INSERT INTO quiz (%s, %s, %s, %s, %s) VALUES (?, ?, ?, ?, ?)",
-            QuizTable.ID_COLUMN,
-            QuizTable.CREATED_AT_COLUMN,
-            QuizTable.UPDATED_AT_COLUMN,
-            QuizTable.TITLE_COLUMN,
-            QuizTable.CREATOR_COLUMN
+            QuizTable.ID,
+            QuizTable.TITLE,
+            QuizTable.CREATOR,
+            QuizTable.CREATED_AT,
+            QuizTable.UPDATED_AT
         );
 
         try (
@@ -72,10 +72,10 @@ public class QuizModel {
             PreparedStatement preparedStatement = connection.prepareStatement(query)
         ) {
             preparedStatement.setString(1, this.id.toString());
-            preparedStatement.setTimestamp(2, Timestamp.from(this.createdAt));
-            preparedStatement.setTimestamp(3, Timestamp.from(this.updatedAt));
-            preparedStatement.setString(4, this.title);
-            preparedStatement.setString(5, this.creator);
+            preparedStatement.setString(2, this.title);
+            preparedStatement.setString(3, this.creator);
+            preparedStatement.setTimestamp(4, Timestamp.from(this.createdAt));
+            preparedStatement.setTimestamp(5, Timestamp.from(this.updatedAt));
             preparedStatement.executeUpdate();
         } catch (SQLException error) {
             throw new DatabaseWriteException(error.getMessage());
@@ -83,11 +83,11 @@ public class QuizModel {
     }
     @Contract("_, _ -> new")
     public static @NotNull QuizModel create(String title, String creator) {
-        return new QuizModel(UUID.randomUUID(), Instant.now(), Instant.now(), title, creator);
+        return new QuizModel(UUID.randomUUID(), title, creator, Instant.now(), Instant.now());
     }
 
     public static @Nullable QuizModel findById(String id) {
-        String query = String.format("SELECT * FROM %s WHERE id = ?", QuizTable.NAME);
+        String query = String.format("SELECT * FROM %s WHERE id = ?", QuizTable.TABLE_NAME);
 
         try (
             Connection connection = Database.getConnection();
@@ -98,13 +98,13 @@ public class QuizModel {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             if (resultSet.next()) {
-                UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID_COLUMN));
-                Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT_COLUMN).toInstant();
-                Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT_COLUMN).toInstant();
-                String title = resultSet.getString(QuizTable.TITLE_COLUMN);
-                String creator = resultSet.getString(QuizTable.CREATOR_COLUMN);
+                UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID));
+                String title = resultSet.getString(QuizTable.TITLE);
+                String creator = resultSet.getString(QuizTable.CREATOR);
+                Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant();
+                Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant();
 
-                return new QuizModel(rsId, createdAt, updatedAt, title, creator);
+                return new QuizModel(rsId, title, creator, createdAt, updatedAt);
             } else {
                 return null;
             }

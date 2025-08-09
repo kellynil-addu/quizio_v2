@@ -5,7 +5,6 @@ import java.util.UUID;
 public class QuestionModel {
     private final UUID id;
     private final UUID quizId;
-    private final UUID answerId;
 
     private TYPE type;
     private String text;
@@ -18,10 +17,9 @@ public class QuestionModel {
         TRUE_OR_FALSE
     }
 
-    public QuestionModel(UUID id, UUID quizId, UUID answerId, TYPE type, String text) {
+    public QuestionModel(UUID id, UUID quizId, TYPE type, String text) {
         this.id = id;
         this.quizId = quizId;
-        this.answerId = answerId;
         this.type = type;
         this.text = text;
     }
@@ -32,10 +30,6 @@ public class QuestionModel {
 
     public UUID getQuizId() {
         return quizId;
-    }
-
-    public UUID getAnswerId() {
-        return answerId;
     }
 
     public TYPE getType() {
