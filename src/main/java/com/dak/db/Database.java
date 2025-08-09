@@ -7,14 +7,18 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class Database {
-    private static MysqlDataSource dataSource;
+    private static final MysqlDataSource dataSource;
 
     static {
-        Database.dataSource = new MysqlDataSource();
-        Database.dataSource.setUrl(EnvironmentVariable.MYSQL_URL);
+        dataSource = new MysqlDataSource();
+        dataSource.setServerName(EnvironmentVariable.DATABASE_HOST);
+        dataSource.setPortNumber(EnvironmentVariable.DATABASE_PORT);
+        dataSource.setDatabaseName(EnvironmentVariable.DATABASE_NAME);
+        dataSource.setUser(EnvironmentVariable.DATABASE_USER);
+        dataSource.setPassword(EnvironmentVariable.DATABASE_PASSWORD);
     }
 
     public static Connection getConnection() throws SQLException {
-        return Database.dataSource.getConnection();
+        return dataSource.getConnection();
     }
 }
