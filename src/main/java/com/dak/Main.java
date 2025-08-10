@@ -18,8 +18,7 @@ public class Main {
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
 
         frame.add(new NewReleaseSection());
-        frame.setSize(1024, 762);
-        frame.setResizable(false);
+        frame.setSize(1920, 1080);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);

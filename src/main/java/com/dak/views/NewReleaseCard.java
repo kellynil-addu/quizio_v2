@@ -9,8 +9,9 @@ import java.awt.*;
 
 public class NewReleaseCard extends JPanel {
     public NewReleaseCard(String title, String creator) {
-        this.setBackground(ColorSet.SECONDARY_BACKGROUND);
-        this.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
+        setLayout(new BorderLayout());
+        setBackground(ColorSet.SECONDARY_BACKGROUND);
+        setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
 
         JLabel titleLabel = new JLabel(title);
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD));
@@ -27,7 +28,11 @@ public class NewReleaseCard extends JPanel {
 
         JButton button = new PrimaryButton("Play");
 
+        JPanel rightPanel = new JPanel();
+        rightPanel.setOpaque(false);
+        rightPanel.add(button);
+
         add(leftPanel);
-        add(button);
+        add(rightPanel, BorderLayout.EAST);
     }
 }
