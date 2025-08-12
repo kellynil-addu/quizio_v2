@@ -88,7 +88,7 @@ public class QuizModel {
         return new QuizModel(UUID.randomUUID(), title, creator, Instant.now(), Instant.now());
     }
 
-    public static List<QuizModel> findAll() {
+    public static @NotNull List<QuizModel> findAll() {
         String query = String.format("SELECT * FROM %s", QuizTable.TABLE_NAME);
 
         try (
