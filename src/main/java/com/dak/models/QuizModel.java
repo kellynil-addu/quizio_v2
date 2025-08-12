@@ -10,6 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.sql.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class QuizModel {
@@ -86,6 +88,32 @@ public class QuizModel {
         return new QuizModel(UUID.randomUUID(), title, creator, Instant.now(), Instant.now());
     }
 
+    public static List<QuizModel> findAll() {
+        String query = String.format("SELECT * FROM %s", QuizTable.TABLE_NAME);
+
+        try (
+            Connection connection = Database.getConnection();
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+        ) {
+            ArrayList<QuizModel> arrayList = new ArrayList<>();
+
+            while (resultSet.next()) {
+                arrayList.add(new QuizModel(
+                        UUID.fromString(resultSet.getString("id")),
+                        resultSet.getString("title"),
+                        resultSet.getString("creator"),
+                        resultSet.getTimestamp("createdAt").toInstant(),
+                        resultSet.getTimestamp("updatedAt").toInstant()
+                ));
+            }
+
+            return arrayList;
+        } catch (SQLException error) {
+            throw new DatabaseReadException(error.getMessage());
+        }
+    }
+
     public static @Nullable QuizModel findById(String id) {
         String query = String.format("SELECT * FROM %s WHERE id = ?", QuizTable.TABLE_NAME);
 
@@ -95,18 +123,18 @@ public class QuizModel {
         ) {
             preparedStatement.setString(1, id);
 
-            ResultSet resultSet = preparedStatement.executeQuery();
+            try (ResultSet resultSet = preparedStatement.executeQuery();) {
+                if (resultSet.next()) {
+                    UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID));
+                    String title = resultSet.getString(QuizTable.TITLE);
+                    String creator = resultSet.getString(QuizTable.CREATOR);
+                    Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant();
+                    Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant();
 
-            if (resultSet.next()) {
-                UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID));
-                String title = resultSet.getString(QuizTable.TITLE);
-                String creator = resultSet.getString(QuizTable.CREATOR);
-                Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant();
-                Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant();
-
-                return new QuizModel(rsId, title, creator, createdAt, updatedAt);
-            } else {
-                return null;
+                    return new QuizModel(rsId, title, creator, createdAt, updatedAt);
+                } else {
+                    return null;
+                }
             }
         } catch (SQLException error) {
             throw new DatabaseReadException(error.getMessage());
