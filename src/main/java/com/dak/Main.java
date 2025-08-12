@@ -1,12 +1,19 @@
 package com.dak;
 
+import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+
+import org.flywaydb.core.Flyway;
+
 import com.dak.configs.EnvironmentVariable;
 import com.dak.views.NewReleaseSection;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
-import org.flywaydb.core.Flyway;
-
-import javax.swing.*;
 
 public class Main {
     public static JFrame frame = new JFrame();
@@ -18,6 +25,7 @@ public class Main {
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
 
         frame.add(new NewReleaseSection());
+        frame.setSize(new Dimension(800, 600));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
