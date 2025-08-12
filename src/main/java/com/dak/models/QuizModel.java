@@ -100,11 +100,11 @@ public class QuizModel {
 
             while (resultSet.next()) {
                 arrayList.add(new QuizModel(
-                        UUID.fromString(resultSet.getString("id")),
-                        resultSet.getString("title"),
-                        resultSet.getString("creator"),
-                        resultSet.getTimestamp("createdAt").toInstant(),
-                        resultSet.getTimestamp("updatedAt").toInstant()
+                        UUID.fromString(resultSet.getString(QuizTable.ID)),
+                        resultSet.getString(QuizTable.TITLE),
+                        resultSet.getString(QuizTable.CREATOR),
+                        resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant(),
+                        resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant()
                 ));
             }
 
