@@ -79,10 +79,10 @@ public class CategoryModel {
             try (ResultSet resultSet = preparedStatement.executeQuery();) {
                 if (resultSet.next()) {
                     UUID rsId = UUID.fromString(resultSet.getString(CategoryTable.ID));
-                    String title = resultSet.getString(CategoryTable.NAME);
-                    String creator = resultSet.getString(CategoryTable.IMAGE);
+                    String name = resultSet.getString(CategoryTable.NAME);
+                    String image = resultSet.getString(CategoryTable.IMAGE);
 
-                    return new CategoryModel(rsId, title, creator);
+                    return new CategoryModel(rsId, name, image);
                 } else {
                     return null;
                 }
