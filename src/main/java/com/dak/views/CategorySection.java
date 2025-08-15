@@ -11,6 +11,7 @@ import javax.swing.JScrollPane;
 
 import com.dak.views.components.SectionHeader;
 import com.dak.views.utils.ColorSet;
+import com.dak.views.utils.ImageSet;
 import com.dak.views.utils.SizeSet;
 
 public class CategorySection extends JPanel {
@@ -46,6 +47,9 @@ public class CategorySection extends JPanel {
         button.setPreferredSize(new Dimension(64, 64));
         button.setMaximumSize(new Dimension(64, 64));
         button.setBackground(ColorSet.SECONDARY_BACKGROUND);
+        button.setIcon(ImageSet.ICON_CATEGORY_CSS);
+        button.setBorder(null);
+        button.setFocusPainted(false);
         return button;
     }
 }
