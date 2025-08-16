@@ -1,8 +1,6 @@
 package com.dak.views.utils;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
@@ -11,25 +9,39 @@ import javax.swing.ImageIcon;
 import com.github.weisj.jsvg.SVGDocument;
 import com.github.weisj.jsvg.parser.SVGLoader;
 import com.github.weisj.jsvg.view.ViewBox;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 public class ImageSet {
-    public static final ImageIcon ICON_CATEGORY_CSS = getIconFromSVG("/assets/images/css.svg", 48, 48);
-    public static final ImageIcon ICON_CATEGORY_HTML = getIconFromSVG("/assets/images/html.svg", 48, 48);
+    private static final String IMAGES_DIR = "/assets/images";
+    private static final int DEFAULT_WIDTH = 50;
+    private static final int DEFAULT_HEIGHT = 50;
 
-    private static ImageIcon getIconFromSVG(String fileName, int width, int length) {
+    public static final ImageIcon CSS_LOGO = getIconFromSVG(IMAGES_DIR + "/css.svg");
+    public static final ImageIcon HTML_LOGO = getIconFromSVG(IMAGES_DIR + "/html.svg");
+
+    @Contract("_ -> new")
+    private static @NotNull ImageIcon getIconFromSVG(String fileName) {
         SVGLoader loader = new SVGLoader();
         URL svgUrl = ImageSet.class.getResource(fileName);
+
+        if (svgUrl == null) {
+            throw new IllegalArgumentException("Resource not found: " + fileName);
+        }
+
         SVGDocument svgDocument = loader.load(svgUrl);
-        // FloatSize size = svgDocument.size();
-        BufferedImage image = new BufferedImage(width, length, BufferedImage.TYPE_INT_ARGB);
+
+        if (svgDocument == null) {
+            throw new IllegalArgumentException("Failed to load SVG from: " + fileName);
+        }
+
+        BufferedImage image = new BufferedImage(DEFAULT_WIDTH, DEFAULT_HEIGHT, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g = image.createGraphics();
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        g.setBackground(Color.RED);
-        svgDocument.render(null,g, new ViewBox(width, length));
+
+        svgDocument.render(null, g, new ViewBox(DEFAULT_WIDTH, DEFAULT_HEIGHT));
         g.dispose();
 
         return new ImageIcon(image);
     }
-
-
 }

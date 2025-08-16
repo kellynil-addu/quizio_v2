@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import com.dak.views.HomePage;
 import org.flywaydb.core.Flyway;
 
 import com.dak.configs.EnvironmentVariable;
@@ -22,8 +23,7 @@ public class Main {
 
         JPanel contentPane = (JPanel) frame.getContentPane();
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
-        
-        switchMenu(new com.dak.views.MainMenu());
+        contentPane.add(new HomePage());
 
         frame.setSize(new Dimension(800, 600));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -31,14 +31,6 @@ public class Main {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-
-    public static void switchMenu(JPanel newMenu) {
-        JPanel contentPane = (JPanel) frame.getContentPane();
-        contentPane.removeAll();
-        contentPane.add(newMenu);
-        contentPane.revalidate();
-        contentPane.repaint();
-    }       
 
     /**
      * Runs all pending migrations on the database.
