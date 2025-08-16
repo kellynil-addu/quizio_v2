@@ -1,12 +1,18 @@
 package com.dak;
 
-import com.dak.configs.EnvironmentVariable;
-import com.dak.views.NewReleaseSection;
-import com.dak.views.utils.ColorSet;
-import com.dak.views.utils.SizeSet;
+import java.awt.Dimension;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+
 import org.flywaydb.core.Flyway;
 
-import javax.swing.*;
+import com.dak.configs.EnvironmentVariable;
+import com.dak.views.utils.ColorSet;
+import com.dak.views.utils.SizeSet;
 
 public class Main {
     public static JFrame frame = new JFrame();
@@ -16,13 +22,23 @@ public class Main {
 
         JPanel contentPane = (JPanel) frame.getContentPane();
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
+        
+        switchMenu(new com.dak.views.MainMenu());
 
-        frame.add(new NewReleaseSection());
+        frame.setSize(new Dimension(800, 600));
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
+    public static void switchMenu(JPanel newMenu) {
+        JPanel contentPane = (JPanel) frame.getContentPane();
+        contentPane.removeAll();
+        contentPane.add(newMenu);
+        contentPane.revalidate();
+        contentPane.repaint();
+    }       
 
     /**
      * Runs all pending migrations on the database.
