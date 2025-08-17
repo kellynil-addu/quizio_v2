@@ -44,6 +44,7 @@ public class CategorySection extends JPanel {
         JButton button = new JButton();
         button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
+        button.setOpaque(true);
         button.setBackground(ColorSet.SECONDARY_BACKGROUND);
         button.setIcon(icon);
         button.setBorder(null);
