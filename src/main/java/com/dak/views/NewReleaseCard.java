@@ -2,6 +2,7 @@ package com.dak.views;
 
 import com.dak.views.components.PrimaryButton;
 import com.dak.views.utils.ColorSet;
+import com.dak.views.utils.ImageSet;
 import com.dak.views.utils.SizeSet;
 
 import javax.swing.*;
@@ -18,18 +19,32 @@ public class NewReleaseCard extends JPanel {
 
         JLabel creatorLabel = new JLabel("By " + creator);
         creatorLabel.setBorder(BorderFactory.createEmptyBorder(4, 0, 0, 0));
-        creatorLabel.setFont(titleLabel.getFont().deriveFont(Font.PLAIN, SizeSet.S));
+        creatorLabel.setFont(titleLabel.getFont().deriveFont(Font.PLAIN, SizeSet.XS));
 
         JPanel leftPanel = new JPanel();
         leftPanel.setOpaque(false);
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
+        leftPanel.add(Box.createVerticalGlue());
         leftPanel.add(titleLabel);
         leftPanel.add(creatorLabel);
+        leftPanel.add(Box.createVerticalGlue());
+
+        JPanel categoriesPanel = new JPanel();
+        categoriesPanel.setOpaque(false);
+
+        JLabel htmlLogo = new JLabel(ImageSet.getHtmlLogo(SizeSet._3XL, SizeSet._3XL));
+        JLabel cssLogo = new JLabel(ImageSet.getCssLogo(SizeSet._3XL, SizeSet._3XL));
+
+        categoriesPanel.add(htmlLogo);
+        categoriesPanel.add(cssLogo);
 
         JButton button = new PrimaryButton("Play");
+        button.setFont(button.getFont().deriveFont(Font.BOLD));
+        button.setPreferredSize(new Dimension(button.getPreferredSize().width, SizeSet._3XL));
 
-        JPanel rightPanel = new JPanel();
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         rightPanel.setOpaque(false);
+        rightPanel.add(categoriesPanel);
         rightPanel.add(button);
 
         add(leftPanel);

@@ -36,7 +36,7 @@ public class CategorySection extends JPanel {
         
         // Load some example buttons.
         for (int i = 0; i < 10; i++) {
-            buttonPanel.add(addCategoryButton(ImageSet.CSS_LOGO));
+            buttonPanel.add(addCategoryButton(ImageSet.getCssLogo()));
         }
     }
 
