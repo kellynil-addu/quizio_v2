@@ -12,29 +12,17 @@ import com.github.weisj.jsvg.view.ViewBox;
 import org.jetbrains.annotations.NotNull;
 
 public class ImageSet {
-    private static final String IMAGES_DIR = "/assets/images";
+    private static final String IMAGES_DIR = "/assets/images/";
     private static final int DEFAULT_WIDTH = 50;
     private static final int DEFAULT_HEIGHT = 50;
 
-    public static ImageIcon getHtmlLogo() {
-        return getIconFromSVG(IMAGES_DIR + "/html.svg", DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    public static @NotNull ImageIcon getIconFromSVG(String filename) {
+        return getIconFromSVG(filename, DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
 
-    public static ImageIcon getHtmlLogo(int w, int h) {
-        return getIconFromSVG(IMAGES_DIR + "/html.svg", w, h);
-    }
-
-    public static ImageIcon getCssLogo() {
-        return getIconFromSVG(IMAGES_DIR + "/css.svg", DEFAULT_WIDTH, DEFAULT_HEIGHT);
-    }
-
-    public static ImageIcon getCssLogo(int w, int h) {
-        return getIconFromSVG(IMAGES_DIR + "/css.svg", w, h);
-    }
-
-    private static @NotNull ImageIcon getIconFromSVG(String fileName, int w, int h) {
+    public static @NotNull ImageIcon getIconFromSVG(String fileName, int w, int h) {
         SVGLoader loader = new SVGLoader();
-        URL svgUrl = ImageSet.class.getResource(fileName);
+        URL svgUrl = ImageSet.class.getResource(IMAGES_DIR + fileName);
 
         if (svgUrl == null) {
             throw new IllegalArgumentException("Resource not found: " + fileName);

@@ -32,8 +32,8 @@ public class NewReleaseCard extends JPanel {
         JPanel categoriesPanel = new JPanel();
         categoriesPanel.setOpaque(false);
 
-        JLabel htmlLogo = new JLabel(ImageSet.getHtmlLogo(SizeSet._3XL, SizeSet._3XL));
-        JLabel cssLogo = new JLabel(ImageSet.getCssLogo(SizeSet._3XL, SizeSet._3XL));
+        JLabel htmlLogo = new JLabel(ImageSet.getIconFromSVG("html.svg", SizeSet._3XL, SizeSet._3XL));
+        JLabel cssLogo = new JLabel(ImageSet.getIconFromSVG("css.svg", SizeSet._3XL, SizeSet._3XL));
 
         categoriesPanel.add(htmlLogo);
         categoriesPanel.add(cssLogo);
