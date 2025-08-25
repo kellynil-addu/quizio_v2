@@ -1,5 +1,9 @@
 package com.dak.views;
 
+import com.dak.Main;
+import com.dak.models.CategoryModel;
+import com.dak.models.QuizCategoryModel;
+import com.dak.models.QuizModel;
 import com.dak.views.components.PrimaryButton;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.ImageSet;
@@ -9,7 +13,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class NewReleaseCard extends JPanel {
-    public NewReleaseCard(String title, String creator) {
+    public NewReleaseCard(QuizModel quiz) {
+        final String title = quiz.getTitle();
+        final String creator = quiz.getCreator();
+
         setLayout(new BorderLayout());
         setBackground(ColorSet.SECONDARY_BACKGROUND);
         setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
@@ -32,13 +39,14 @@ public class NewReleaseCard extends JPanel {
         JPanel categoriesPanel = new JPanel();
         categoriesPanel.setOpaque(false);
 
-        JLabel htmlLogo = new JLabel(ImageSet.getHtmlLogo(SizeSet._3XL, SizeSet._3XL));
-        JLabel cssLogo = new JLabel(ImageSet.getCssLogo(SizeSet._3XL, SizeSet._3XL));
+        java.util.List<CategoryModel> categories = QuizCategoryModel.findCategoriesFromQuizId(quiz.getId().toString());
+        for (CategoryModel category : categories) {
+            JLabel icon = new JLabel(ImageSet.getIconFromSVG(category.getImage() + ".svg", SizeSet._3XL, SizeSet._3XL));
+            icon.setToolTipText(category.getName());
+            categoriesPanel.add(icon);
+        }
 
-        categoriesPanel.add(htmlLogo);
-        categoriesPanel.add(cssLogo);
-
-        JButton button = new PrimaryButton("Play");
+        JButton button = new PrimaryButton("Take Quiz");
         button.setFont(button.getFont().deriveFont(Font.BOLD));
         button.setPreferredSize(new Dimension(button.getPreferredSize().width, SizeSet._3XL));
 
