@@ -33,7 +33,6 @@ public class Main {
 
         JPanel contentPane = (JPanel) frame.getContentPane();
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
-        // contentPane.add(new HomePage());
         switchPanel(new HomePage());
 
         frame.setSize(new Dimension(1200, 800));
@@ -52,7 +51,6 @@ public class Main {
         }
         page = panel;
         contentPane.add(page);
-        // contentPane.removeAll();
     }
 
     /**
