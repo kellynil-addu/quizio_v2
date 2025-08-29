@@ -23,7 +23,7 @@ public class NewReleaseSection extends JPanel {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.insets = new Insets(SizeSet.XS / 2, SizeSet.XS / 2, SizeSet.XS / 2, SizeSet.XS / 2);
+        gbc.insets = new Insets(SizeSet._5XS, SizeSet._5XS, SizeSet._5XS, SizeSet._5XS);
 
         for (int i = 0; i < titles.length; i++) {
             gbc.gridx = i % 2;

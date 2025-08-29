@@ -22,7 +22,7 @@ public class CategorySection extends JPanel {
         SectionHeader header = new SectionHeader("Categories");
         
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, SizeSet._3XS,0 ));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, SizeSet.XL, 0));
         
         JScrollPane scrollPane = new JScrollPane();
@@ -33,11 +33,24 @@ public class CategorySection extends JPanel {
 
         this.add(header, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
-        
-        // Load some example buttons.
-        for (int i = 0; i < 10; i++) {
-            buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("css.svg")));
-        }
+
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("angular.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("cpp.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("csharp.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("css.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("docker.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("git.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("github.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("golang.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("html.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("java.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("js.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("nodejs.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("php.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("python.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("react.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("ruby.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("vue.svg")));
     }
 
     private @NotNull JButton addCategoryButton(ImageIcon icon) {
