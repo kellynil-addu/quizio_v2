@@ -1,8 +1,6 @@
 package com.dak.views;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 
 import javax.swing.*;
 
@@ -24,7 +22,7 @@ public class CategorySection extends JPanel {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, SizeSet._3XS,0 ));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, SizeSet.XL, 0));
-        
+
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setBorder(null);
         scrollPane.setViewportView(buttonPanel);
@@ -62,6 +60,7 @@ public class CategorySection extends JPanel {
         button.setIcon(icon);
         button.setBorder(null);
         button.setFocusPainted(false);
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         return button;
     }
 }

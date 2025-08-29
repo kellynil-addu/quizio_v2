@@ -13,6 +13,7 @@ public class PrimaryButton extends JButton {
         super(text);
         setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XL, SizeSet.XS, SizeSet.XL));
         setOpaque(true);
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBackground(ColorSet.PRIMARY);
         setForeground(ColorSet.SECONDARY_FOREGROUND);
 

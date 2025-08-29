@@ -1,6 +1,6 @@
 package com.dak;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -25,6 +25,7 @@ public class Main {
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
         contentPane.add(new HomePage());
 
+        frame.setTitle("Quizio");
         frame.setSize(new Dimension(1200, 800));
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

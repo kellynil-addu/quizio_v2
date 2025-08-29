@@ -23,9 +23,16 @@ public class NewReleaseSection extends JPanel {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.insets = new Insets(SizeSet._5XS, SizeSet._5XS, SizeSet._5XS, SizeSet._5XS);
+        Insets withoutTop = new Insets(0, SizeSet._5XS, SizeSet._5XS, SizeSet._5XS);
+        Insets withTop = new Insets(SizeSet._5XS, SizeSet._5XS, SizeSet._5XS, SizeSet._5XS);
 
         for (int i = 0; i < titles.length; i++) {
+            if (i == 0) {
+                gbc.insets = withoutTop;
+            } else {
+                gbc.insets = withTop;
+            }
+
             gbc.gridx = i % 2;
             gbc.gridy = i / 2;
             gbc.weightx = 1.0;
