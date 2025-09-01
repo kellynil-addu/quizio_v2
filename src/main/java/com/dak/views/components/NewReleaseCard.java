@@ -1,6 +1,5 @@
-package com.dak.views;
+package com.dak.views.components;
 
-import com.dak.views.components.PrimaryButton;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.ImageSet;
 import com.dak.views.utils.SizeSet;

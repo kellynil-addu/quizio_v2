@@ -5,6 +5,9 @@
 
 package com.dak.views;
 
+import com.dak.views.components.CategorySection;
+import com.dak.views.components.NewReleaseSection;
+
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;

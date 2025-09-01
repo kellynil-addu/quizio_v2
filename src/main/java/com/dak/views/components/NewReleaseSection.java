@@ -1,6 +1,5 @@
-package com.dak.views;
+package com.dak.views.components;
 
-import com.dak.views.components.SectionHeader;
 import com.dak.views.utils.SizeSet;
 
 import javax.swing.*;
