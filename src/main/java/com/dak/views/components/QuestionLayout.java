@@ -23,8 +23,8 @@ public class QuestionLayout extends JPanel {
         topPanel.add(textLabel);
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(new JButton("Previous Question"), BorderLayout.WEST);
-        bottomPanel.add(new PrimaryButton("Next Question"), BorderLayout.EAST);
+        bottomPanel.add(new GhostButton("Previous Question"), BorderLayout.WEST);
+        bottomPanel.add(new JButton("Next Question"), BorderLayout.EAST);
 
         add(topPanel, BorderLayout.NORTH);
         add(centerComponent, BorderLayout.CENTER);
