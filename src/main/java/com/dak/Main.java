@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
-import com.dak.views.components.TrueOrFalsePanel;
+import com.dak.views.components.OrderingPanel;
 import org.flywaydb.core.Flyway;
 
 import com.dak.configs.EnvironmentVariable;
@@ -23,7 +23,7 @@ public class Main {
 
         JPanel contentPane = (JPanel) frame.getContentPane();
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
-        contentPane.add(new TrueOrFalsePanel());
+        contentPane.add(new OrderingPanel());
 
         frame.setTitle("Quizio");
         frame.setSize(new Dimension(1200, 800));
