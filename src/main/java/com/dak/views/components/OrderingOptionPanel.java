@@ -4,9 +4,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class OrderingOptionPanel extends JPanel {
-    private Point initialClick;
+    private Boolean showComponent = true;
+    JFrame ghostFrame;
 
     public OrderingOptionPanel(String text) {
         setLayout(new FlowLayout());
@@ -14,32 +16,38 @@ public class OrderingOptionPanel extends JPanel {
         setBorder(BorderFactory.createLineBorder(Color.BLACK));
         add(new JLabel(text));
 
-        // Make it draggable
-        MouseAdapter dragListener = new MouseAdapter() {
+        addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                initialClick = e.getPoint();
+                showComponent = false;
+                setOpaque(false);
+                repaint();
+
+                ghostFrame = new JFrame();
+
+                try {
+                    ghostFrame.add((JPanel) clone());
+                } catch (CloneNotSupportedException ex) {
+                    throw new RuntimeException(ex.getMessage());
+                }
             }
 
             @Override
-            public void mouseDragged(MouseEvent e) {
-                // Get current location of the panel
-                int x = getLocation().x;
-                int y = getLocation().y;
-
-                // Determine how much the mouse moved
-                int xMoved = e.getX() - initialClick.x;
-                int yMoved = e.getY() - initialClick.y;
-
-                // Move panel to new location
-                int newX = x + xMoved;
-                int newY = y + yMoved;
-
-                setLocation(newX, newY);
+            public void mouseReleased(MouseEvent e) {
+                showComponent = true;
+                setOpaque(true);
+                repaint();
             }
-        };
+        });
+    }
 
-        addMouseListener(dragListener);
-        addMouseMotionListener(dragListener);
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+
+        if (!showComponent) {
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0f));
+        }
     }
 }
