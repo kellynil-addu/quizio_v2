@@ -25,10 +25,10 @@ public class ImageSet {
 
     public static @NotNull ImageIcon getCachedIconFromSVG(String filename, int w, int h) {
         ConcurrentHashMap<Dimension, ImageIcon> iconMap; 
-        iconMap = cache.computeIfAbsent(filename, _ -> new ConcurrentHashMap<>());
+        iconMap = cache.computeIfAbsent(filename, k -> new ConcurrentHashMap<>());
 
         ImageIcon icon;
-        icon = iconMap.computeIfAbsent(new Dimension(w, h), _ -> getIconFromSVG(filename, w, h));
+        icon = iconMap.computeIfAbsent(new Dimension(w, h), k -> getIconFromSVG(filename, w, h));
 
         return icon;
     }
