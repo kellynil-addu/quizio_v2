@@ -14,22 +14,23 @@ public class CategorySection extends JPanel {
     private static final int BUTTON_HEIGHT = 64;
 
     public CategorySection() {
+        this.setOpaque(false);
         this.setLayout(new BorderLayout());
 
         SectionHeader header = new SectionHeader("Categories");
         
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, SizeSet._3XS,0 ));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, SizeSet.XL, 0));
 
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(null);
         scrollPane.setViewportView(buttonPanel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-
-        this.add(header, BorderLayout.NORTH);
-        this.add(scrollPane, BorderLayout.CENTER);
 
         buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("angular.svg")));
         buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("cpp.svg")));
@@ -48,6 +49,9 @@ public class CategorySection extends JPanel {
         buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("react.svg")));
         buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("ruby.svg")));
         buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("vue.svg")));
+
+        this.add(header, BorderLayout.NORTH);
+        this.add(scrollPane, BorderLayout.CENTER);
     }
 
     private @NotNull JButton addCategoryButton(ImageIcon icon) {
@@ -55,7 +59,7 @@ public class CategorySection extends JPanel {
         button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button.setOpaque(true);
-        button.setBackground(ColorSet.SECONDARY_BACKGROUND);
+        button.setBackground(ColorSet.getSecondaryBackground());
         button.setIcon(icon);
         button.setBorder(null);
         button.setFocusPainted(false);

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 public class HomePage extends JPanel {
     public HomePage() {
+        this.setOpaque(false);
         this.setLayout(new BorderLayout());
         this.add(new CategorySection(), BorderLayout.NORTH);
         this.add(new NewReleaseSection(), BorderLayout.CENTER);

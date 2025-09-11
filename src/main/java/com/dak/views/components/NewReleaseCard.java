@@ -10,13 +10,15 @@ import java.awt.*;
 public class NewReleaseCard extends JPanel {
     public NewReleaseCard(String title, String creator) {
         setLayout(new BorderLayout());
-        setBackground(ColorSet.SECONDARY_BACKGROUND);
+        setBackground(ColorSet.getSecondaryBackground());
         setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
 
         JLabel titleLabel = new JLabel(title);
+        titleLabel.setForeground(ColorSet.getPrimaryForeground());
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD));
 
         JLabel creatorLabel = new JLabel("By " + creator);
+        creatorLabel.setForeground(ColorSet.getPrimaryForeground());
         creatorLabel.setBorder(BorderFactory.createEmptyBorder(4, 0, 0, 0));
         creatorLabel.setFont(titleLabel.getFont().deriveFont(Font.PLAIN, SizeSet.XS));
 

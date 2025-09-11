@@ -2,13 +2,9 @@ package com.dak;
 
 import java.awt.*;
 
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.WindowConstants;
+import javax.swing.*;
 
-import com.dak.views.components.OrderingPanel;
+import com.dak.views.HomePage;
 import org.flywaydb.core.Flyway;
 
 import com.dak.configs.EnvironmentVariable;
@@ -19,11 +15,14 @@ public class Main {
     public static JFrame frame = new JFrame();
 
     public static void main(String[] args) {
-        UIManager.put("Label.foreground", ColorSet.PRIMARY_FOREGROUND);
+        UIManager.put("Label.foreground", ColorSet.getPrimaryBackground());
 
         JPanel contentPane = (JPanel) frame.getContentPane();
+        contentPane.setBackground(ColorSet.getPrimaryBackground());
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
-        contentPane.add(new OrderingPanel());
+
+        HomePage homePage = new HomePage();
+        contentPane.add(homePage);
 
         frame.setTitle("Quizio");
         frame.setSize(new Dimension(1200, 800));

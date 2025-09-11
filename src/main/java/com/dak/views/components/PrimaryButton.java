@@ -14,8 +14,8 @@ public class PrimaryButton extends JButton {
         setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XL, SizeSet.XS, SizeSet.XL));
         setOpaque(true);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        setBackground(ColorSet.PRIMARY);
-        setForeground(ColorSet.SECONDARY_FOREGROUND);
+        setBackground(ColorSet.getPrimaryButton());
+        setForeground(ColorSet.getSecondaryForeground());
 
         addMouseListener(new MouseAdapter() {
             @Override
@@ -25,7 +25,7 @@ public class PrimaryButton extends JButton {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                setBackground(ColorSet.PRIMARY);
+                setBackground(ColorSet.getPrimaryButton());
             }
         });
     }

@@ -15,11 +15,14 @@ public class NewReleaseSection extends JPanel {
     };
 
     public NewReleaseSection() {
+        setOpaque(false);
         setLayout(new BorderLayout());
 
         SectionHeader header = new SectionHeader("New Release");
 
         JPanel mainPanel = new JPanel(new GridBagLayout());
+        mainPanel.setOpaque(false);
+
         GridBagConstraints gbc = new GridBagConstraints();
 
         Insets withoutTop = new Insets(0, SizeSet._5XS, SizeSet._5XS, SizeSet._5XS);
@@ -40,6 +43,7 @@ public class NewReleaseSection extends JPanel {
         }
 
         JPanel centerPanel = new JPanel(new BorderLayout());
+        centerPanel.setOpaque(false);
         centerPanel.add(mainPanel, BorderLayout.NORTH);
 
         add(header, BorderLayout.NORTH);
