@@ -3,6 +3,7 @@ package com.dak.views.utils;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.net.URL;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.swing.ImageIcon;
 
@@ -15,6 +16,22 @@ public class ImageSet {
     private static final String IMAGES_DIR = "/assets/images/";
     private static final int DEFAULT_WIDTH = 50;
     private static final int DEFAULT_HEIGHT = 50;
+
+    private static final ConcurrentHashMap<String, ConcurrentHashMap<Dimension, ImageIcon>> cache = new ConcurrentHashMap<>();
+
+    public static @NotNull ImageIcon getCachedIconFromSVG(String filename) {
+        return getCachedIconFromSVG(filename, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
+
+    public static @NotNull ImageIcon getCachedIconFromSVG(String filename, int w, int h) {
+        ConcurrentHashMap<Dimension, ImageIcon> iconMap; 
+        iconMap = cache.computeIfAbsent(filename, _ -> new ConcurrentHashMap<>());
+
+        ImageIcon icon;
+        icon = iconMap.computeIfAbsent(new Dimension(w, h), _ -> getIconFromSVG(filename, w, h));
+
+        return icon;
+    }
 
     public static @NotNull ImageIcon getIconFromSVG(String filename) {
         return getIconFromSVG(filename, DEFAULT_WIDTH, DEFAULT_HEIGHT);

@@ -31,23 +31,23 @@ public class CategorySection extends JPanel {
         this.add(header, BorderLayout.NORTH);
         this.add(scrollPane, BorderLayout.CENTER);
 
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("angular.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("cpp.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("csharp.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("css.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("docker.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("git.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("github.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("golang.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("html.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("java.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("js.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("nodejs.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("php.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("python.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("react.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("ruby.svg")));
-        buttonPanel.add(addCategoryButton(ImageSet.getIconFromSVG("vue.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("angular.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("cpp.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("csharp.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("css.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("docker.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("git.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("github.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("golang.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("html.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("java.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("js.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("nodejs.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("php.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("python.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("react.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("ruby.svg")));
+        buttonPanel.add(addCategoryButton(ImageSet.getCachedIconFromSVG("vue.svg")));
     }
 
     private @NotNull JButton addCategoryButton(ImageIcon icon) {
