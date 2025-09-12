@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import com.dak.views.utils.ColorSet;
+import com.dak.views.utils.AppTheme;
 import com.dak.views.utils.ImageSet;
 import com.dak.views.utils.SizeSet;
 import org.jetbrains.annotations.NotNull;
@@ -14,15 +14,19 @@ public class CategorySection extends JPanel {
     private static final int BUTTON_HEIGHT = 64;
 
     public CategorySection() {
+        this.setBackground(AppTheme.getPrimaryBackground());
         this.setLayout(new BorderLayout());
 
         SectionHeader header = new SectionHeader("Categories");
         
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setOpaque(false);
         buttonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, SizeSet._3XS,0 ));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, SizeSet.XL, 0));
 
         JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setOpaque(false);
+        scrollPane.getViewport().setOpaque(false);
         scrollPane.setBorder(null);
         scrollPane.setViewportView(buttonPanel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -55,7 +59,7 @@ public class CategorySection extends JPanel {
         button.setPreferredSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button.setMaximumSize(new Dimension(BUTTON_WIDTH, BUTTON_HEIGHT));
         button.setOpaque(true);
-        button.setBackground(ColorSet.SECONDARY_BACKGROUND);
+        button.setBackground(AppTheme.getSecondaryBackground());
         button.setIcon(icon);
         button.setBorder(null);
         button.setFocusPainted(false);

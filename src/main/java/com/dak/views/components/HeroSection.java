@@ -1,4 +1,4 @@
-package com.dak.views;
+package com.dak.views.components;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 import com.dak.Main;
+import com.dak.views.DummyPage;
 import com.dak.views.components.PrimaryButton;
 import com.dak.views.utils.*;
 
 public class HeroSection extends JPanel {
     
     public HeroSection() {
+        this.setBackground(AppTheme.TRANSPARENT);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(Box.createVerticalStrut(SizeSet.S));
 
@@ -26,7 +28,7 @@ public class HeroSection extends JPanel {
 
     private JPanel createCallToActionPanel() {
         JPanel panel = new JPanel();
-        panel.setBackground(ColorSet.SECONDARY_FOREGROUND);
+        panel.setBackground(AppTheme.getSecondaryForeground());
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, SizeSet.XL, 0));
         panel.setOpaque(false);
 
@@ -34,8 +36,8 @@ public class HeroSection extends JPanel {
         label.setOpaque(false);
 
         panel.add(label);
-        panel.add(createBigButton("Log in", null, e -> Main.switchPanel(new DummyPage("Login"))));
-        panel.add(createBigButton("Sign up", null, e -> Main.switchPanel(new DummyPage("Register"))));
+        panel.add(createBigButton("Log in", null, e -> Main.switchPage(new DummyPage("Login"))));
+        panel.add(createBigButton("Sign up", null, e -> Main.switchPage(new DummyPage("Register"))));
 
         return panel;
     }

@@ -6,18 +6,17 @@
 package com.dak.views;
 
 import com.dak.views.components.CategorySection;
+import com.dak.views.components.HeroSection;
 import com.dak.views.components.NewReleaseSection;
+import com.dak.views.utils.AppTheme;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
-public class HomePage extends JPanel {
+public class HomePage extends AppPage {
     public HomePage() {
-        this.setLayout(new BorderLayout());
-        this.add(new HeroSection(), BorderLayout.NORTH);
-        this.add(new CategorySection(), BorderLayout.NORTH);
-        this.add(new NewReleaseSection(), BorderLayout.CENTER);
+        this.setBackground(AppTheme.TRANSPARENT);
 
         final JPanel nestedPanel = new JPanel();
 
@@ -28,5 +27,10 @@ public class HomePage extends JPanel {
         nestedPanel.add(new CategorySection(), BorderLayout.NORTH);
         nestedPanel.add(new NewReleaseSection());
         this.add(nestedPanel);
+    }
+
+    @Override
+    public AppPage cloneState() {
+        return new HomePage();
     }
 }

@@ -1,6 +1,6 @@
 package com.dak.views.components;
 
-import com.dak.views.utils.ColorSet;
+import com.dak.views.utils.AppTheme;
 import com.dak.views.utils.SizeSet;
 
 import javax.swing.*;
@@ -14,8 +14,8 @@ public class PrimaryButton extends JButton {
         // setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XL, SizeSet.XS, SizeSet.XL));
         setOpaque(true);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        setBackground(ColorSet.PRIMARY);
-        setForeground(ColorSet.SECONDARY_FOREGROUND);
+        setBackground(AppTheme.getPrimaryButton());
+        setForeground(AppTheme.getSecondaryForeground());
         setMargin(new Insets(SizeSet.XS, SizeSet.XL, SizeSet.XS, SizeSet.XL));
 
         addMouseListener(new MouseAdapter() {
@@ -26,7 +26,7 @@ public class PrimaryButton extends JButton {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                setBackground(ColorSet.PRIMARY);
+                setBackground(AppTheme.getPrimaryButton());
             }
         });
     }

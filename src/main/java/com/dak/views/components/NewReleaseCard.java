@@ -2,7 +2,7 @@ package com.dak.views.components;
 
 import com.dak.Main;
 import com.dak.views.DummyPage;
-import com.dak.views.utils.ColorSet;
+import com.dak.views.utils.AppTheme;
 import com.dak.views.utils.ImageSet;
 import com.dak.views.utils.SizeSet;
 
@@ -12,13 +12,15 @@ import java.awt.*;
 public class NewReleaseCard extends JPanel {
     public NewReleaseCard(String title, String creator) {
         setLayout(new BorderLayout());
-        setBackground(ColorSet.SECONDARY_BACKGROUND);
+        setBackground(AppTheme.getSecondaryBackground());
         setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
         
         JLabel titleLabel = new JLabel(title);
+        titleLabel.setForeground(AppTheme.getPrimaryForeground());
         titleLabel.setFont(titleLabel.getFont().deriveFont(Font.BOLD));
         
         JLabel creatorLabel = new JLabel("By " + creator);
+        creatorLabel.setForeground(AppTheme.getPrimaryForeground());
         creatorLabel.setBorder(BorderFactory.createEmptyBorder(4, 0, 0, 0));
         creatorLabel.setFont(titleLabel.getFont().deriveFont(Font.PLAIN, SizeSet.XS));
         
@@ -41,7 +43,7 @@ public class NewReleaseCard extends JPanel {
 
         JButton button = new PrimaryButton("Play");
         button.setFont(button.getFont().deriveFont(Font.BOLD));
-        button.addActionListener(e -> Main.switchPanel(new DummyPage(title)));
+        button.addActionListener(e -> Main.switchPage(new DummyPage(title)));
         button.setPreferredSize(new Dimension(button.getPreferredSize().width, SizeSet._3XL));
 
         JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
