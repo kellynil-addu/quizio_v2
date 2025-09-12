@@ -16,7 +16,7 @@ public class ColorSet {
 
     public static void toLightMode() {
         primaryBackground = Color.decode("#FFFFFF");
-        secondaryBackground = Color.decode("#E2E2E2");
+        secondaryBackground = Color.decode("#F3F3F3");
         primaryForeground = Color.decode("#353535");
         secondaryForeground = Color.decode("#FFFFFF");
         primaryButton = Color.decode("#1B98FF");
