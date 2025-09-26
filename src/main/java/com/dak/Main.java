@@ -25,7 +25,7 @@ public class Main {
         AppTheme.initialize();
 
         JPanel contentPane = (JPanel) frame.getContentPane();
-        contentPane.setBackground(AppTheme.getPrimaryBackground());
+        contentPane.setBackground(Color.RED);
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
         switchPage(new HomePage());
 

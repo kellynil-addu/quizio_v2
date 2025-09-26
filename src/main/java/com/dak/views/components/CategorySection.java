@@ -14,7 +14,7 @@ public class CategorySection extends JPanel {
     private static final int BUTTON_HEIGHT = 64;
 
     public CategorySection() {
-        this.setBackground(AppTheme.getPrimaryBackground());
+        this.setOpaque(false);
         this.setLayout(new BorderLayout());
 
         SectionHeader header = new SectionHeader("Categories");

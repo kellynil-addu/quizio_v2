@@ -16,7 +16,7 @@ import javax.swing.JPanel;
 
 public class HomePage extends AppPage {
     public HomePage() {
-        this.setBackground(AppTheme.TRANSPARENT);
+        this.setOpaque(false);
 
         final JPanel nestedPanel = new JPanel();
 
@@ -26,6 +26,7 @@ public class HomePage extends AppPage {
         nestedPanel.setLayout(new BorderLayout());
         nestedPanel.add(new CategorySection(), BorderLayout.NORTH);
         nestedPanel.add(new NewReleaseSection());
+        nestedPanel.setOpaque(false);
         this.add(nestedPanel);
     }
 

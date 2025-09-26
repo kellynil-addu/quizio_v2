@@ -13,7 +13,7 @@ import com.dak.views.utils.*;
 public class HeroSection extends JPanel {
     
     public HeroSection() {
-        this.setBackground(AppTheme.TRANSPARENT);
+        this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.add(Box.createVerticalStrut(SizeSet.S));
 

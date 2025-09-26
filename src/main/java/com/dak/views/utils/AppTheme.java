@@ -3,17 +3,13 @@ package com.dak.views.utils;
 import java.awt.Color;
 import java.awt.Font;
 
-import javax.swing.JPanel;
 import javax.swing.UIManager;
 
 import com.dak.Main;
 import com.formdev.flatlaf.FlatDarkLaf;
 import com.formdev.flatlaf.FlatLightLaf;
-import com.mysql.cj.x.protobuf.MysqlxNotice;
 
 public class AppTheme {
-    public static Color TRANSPARENT = new Color(0, 0, 0, 0); // FlatLAF requires applying transparent backgrounds this way.
-
     private static boolean isLightMode;
     
     private static Color primaryBackground;
