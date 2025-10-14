@@ -7,11 +7,21 @@ public class ColorSet {
     private static Color secondaryBackground;
     private static Color primaryForeground;
     private static Color secondaryForeground;
+    private static Color placeholderForeground;
+    private static Color primaryBorder;
     private static Color primaryButton;
+    private static Color ghostButton;
+    private static Color ghostButtonHover;
+    private static Color selectedOptionBackground;
+    private static Color selectedOptionAccent;
+    private static Color incorrectOptionBackground;
+    private static Color incorrectOptionAccent;
+    private static Color correctOptionBackground;
+    private static Color correctOptionAccent;
 
     static {
         // Set default color theme.
-        toDarkMode();
+        toLightMode();
     }
 
     public static void toLightMode() {
@@ -19,7 +29,17 @@ public class ColorSet {
         secondaryBackground = Color.decode("#F3F3F3");
         primaryForeground = Color.decode("#353535");
         secondaryForeground = Color.decode("#FFFFFF");
+        placeholderForeground = Color.decode("#353535");
+        primaryBorder = Color.decode("#B2B2B2");
         primaryButton = Color.decode("#1B98FF");
+        ghostButton = Color.decode("#000000");
+        ghostButtonHover = Color.decode("#F3F3F3");
+        selectedOptionBackground = Color.decode("#CBE8FF");
+        selectedOptionAccent = Color.decode("#3692DE");
+        incorrectOptionBackground = Color.decode("#FFD8D8");
+        incorrectOptionAccent = Color.decode("#DF4D50");
+        correctOptionBackground = Color.decode("#B9FFBE");
+        correctOptionAccent = Color.decode("#35BD3E");
     }
 
     public static void toDarkMode() {
@@ -27,7 +47,17 @@ public class ColorSet {
         secondaryBackground = Color.decode("#353535");
         primaryForeground = Color.decode("#FFFFFF");
         secondaryForeground = Color.decode("#FFFFFF");
+        placeholderForeground = Color.decode("#353535");
+        primaryBorder = Color.decode("#FFFFFF");
         primaryButton = Color.decode("#1B98FF");
+        ghostButton = Color.decode("#000000");
+        ghostButtonHover = Color.decode("#F3F3F3");
+        selectedOptionBackground = Color.decode("#CBE8FF");
+        selectedOptionAccent = Color.decode("#3692DE");
+        incorrectOptionBackground = Color.decode("#FFD8D8");
+        incorrectOptionAccent = Color.decode("#DF4D50");
+        correctOptionBackground = Color.decode("#B9FFBE");
+        correctOptionAccent = Color.decode("#35BD3E");
     }
 
     public static Color getPrimaryBackground() {
@@ -46,7 +76,47 @@ public class ColorSet {
         return secondaryForeground;
     }
 
+    public static Color getPlaceholderForeground() {
+        return placeholderForeground;
+    }
+
+    public static Color getPrimaryBorder() {
+        return primaryBorder;
+    }
+
     public static Color getPrimaryButton() {
         return primaryButton;
+    }
+
+    public static Color getGhostButton() {
+        return ghostButton;
+    }
+
+    public static Color getGhostButtonHover() {
+        return ghostButtonHover;
+    }
+
+    public static Color getSelectedOptionBackground() {
+        return selectedOptionBackground;
+    }
+
+    public static Color getSelectedOptionAccent() {
+        return selectedOptionAccent;
+    }
+
+    public static Color incorrectOptionBackground() {
+        return incorrectOptionBackground;
+    }
+
+    public static Color incorrectOptionAccent() {
+        return incorrectOptionAccent;
+    }
+
+    public static Color correctOptionBackground() {
+        return correctOptionBackground;
+    }
+
+    public static Color correctOptionAccent() {
+        return correctOptionAccent;
     }
 }

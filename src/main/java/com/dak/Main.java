@@ -4,7 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 
-import com.dak.views.HomePage;
+import com.dak.views.components.*;
 import org.flywaydb.core.Flyway;
 
 import com.dak.configs.EnvironmentVariable;
@@ -13,16 +13,20 @@ import com.dak.views.utils.SizeSet;
 
 public class Main {
     public static JFrame frame = new JFrame();
+    public static JPanel cardPanel = new JPanel(new CardLayout());
 
     public static void main(String[] args) {
-        UIManager.put("Label.foreground", ColorSet.getPrimaryBackground());
-
         JPanel contentPane = (JPanel) frame.getContentPane();
         contentPane.setBackground(ColorSet.getPrimaryBackground());
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
 
-        HomePage homePage = new HomePage();
-        contentPane.add(homePage);
+        cardPanel.setOpaque(false);
+        cardPanel.add(new FillInTheBlankPanel(), "1");
+        cardPanel.add(new MultipleChoicePanel(), "2");
+        cardPanel.add(new MultiSelectPanel(), "3");
+        cardPanel.add(new TrueOrFalsePanel(), "4");
+
+        contentPane.add(cardPanel);
 
         frame.setTitle("Quizio");
         frame.setSize(new Dimension(1200, 800));

@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package com.dak.views;
-
-import com.dak.views.components.CategorySection;
-import com.dak.views.components.NewReleaseSection;
+package com.dak.views.components;
 
 import java.awt.BorderLayout;
 

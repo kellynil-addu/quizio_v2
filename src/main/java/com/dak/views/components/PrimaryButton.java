@@ -11,7 +11,7 @@ import java.awt.event.MouseEvent;
 public class PrimaryButton extends JButton {
     public PrimaryButton(String text) {
         super(text);
-        setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XL, SizeSet.XS, SizeSet.XL));
+        setBorder(BorderFactory.createEmptyBorder(SizeSet._2XS, SizeSet.L, SizeSet._2XS, SizeSet.L));
         setOpaque(true);
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setBackground(ColorSet.getPrimaryButton());
