@@ -1,5 +1,6 @@
 package com.dak.views.components;
 
+import com.dak.Main;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.ImageSet;
 import com.dak.views.utils.SizeSet;
@@ -42,6 +43,10 @@ public class NewReleaseCard extends JPanel {
         JButton button = new PrimaryButton("Play");
         button.setFont(button.getFont().deriveFont(Font.BOLD));
         button.setPreferredSize(new Dimension(button.getPreferredSize().width, SizeSet._3XL));
+
+        CardLayout cardLayout = (CardLayout) Main.appPanel.getLayout();
+
+        button.addActionListener(e -> cardLayout.show(Main.appPanel, "quiz"));
 
         JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, 0));
         rightPanel.setOpaque(false);

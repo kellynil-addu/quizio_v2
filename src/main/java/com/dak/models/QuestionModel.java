@@ -13,7 +13,6 @@ public class QuestionModel {
         FILL_IN_THE_BLANK,
         MULTI_SELECT,
         MULTIPLE_CHOICE,
-        ORDERING,
         TRUE_OR_FALSE
     }
 

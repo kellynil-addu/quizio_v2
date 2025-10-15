@@ -30,7 +30,7 @@ public class MultipleChoicePanel extends JPanel {
         mainPanel.add(Box.createVerticalStrut(SizeSet.M));
         mainPanel.add(optionFour);
 
-        add(new QuestionPage(mainPanel));
+        add(new QuestionLayout(mainPanel));
     }
 
     private @NotNull JPanel createOption(String text) {

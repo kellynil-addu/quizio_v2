@@ -22,7 +22,7 @@ public class TrueOrFalsePanel extends JPanel {
         mainPanel.add(trueOption);
         mainPanel.add(falseOption);
 
-        add(new QuestionPage(mainPanel));
+        add(new QuestionLayout(mainPanel));
     }
 
     private @NotNull JPanel createOption(String text) {
@@ -31,6 +31,7 @@ public class TrueOrFalsePanel extends JPanel {
         option.setIcon(new EmptyIcon());
         option.setSelectedIcon(new EmptyIcon());
         option.setHorizontalAlignment(SwingConstants.CENTER);
+        option.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         option.setBorder(BorderFactory.createEmptyBorder(SizeSet._3XS, SizeSet._3XS, SizeSet._3XS, SizeSet._3XS));
 
         buttonGroup.add(option);

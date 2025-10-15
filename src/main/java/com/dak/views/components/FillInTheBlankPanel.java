@@ -24,6 +24,6 @@ public class FillInTheBlankPanel extends JPanel {
         mainPanel.setOpaque(false);
         mainPanel.add(inputField, gbc);
 
-        add(new QuestionPage(mainPanel));
+        add(new QuestionLayout(mainPanel));
     }
 }
