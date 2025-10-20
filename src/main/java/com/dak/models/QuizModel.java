@@ -2,6 +2,7 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.QuizTable;
+import com.dak.mappers.QuizMapper;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -98,13 +99,7 @@ public class QuizModel {
             ArrayList<QuizModel> arrayList = new ArrayList<>();
 
             while (resultSet.next()) {
-                arrayList.add(new QuizModel(
-                        UUID.fromString(resultSet.getString(QuizTable.ID)),
-                        resultSet.getString(QuizTable.TITLE),
-                        resultSet.getString(QuizTable.CREATOR),
-                        resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant(),
-                        resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant()
-                ));
+                arrayList.add(QuizMapper.toModel(resultSet));
             }
 
             return arrayList;
@@ -124,13 +119,7 @@ public class QuizModel {
 
             try (ResultSet resultSet = preparedStatement.executeQuery();) {
                 if (resultSet.next()) {
-                    UUID rsId = UUID.fromString(resultSet.getString(QuizTable.ID));
-                    String title = resultSet.getString(QuizTable.TITLE);
-                    String creator = resultSet.getString(QuizTable.CREATOR);
-                    Instant createdAt = resultSet.getTimestamp(QuizTable.CREATED_AT).toInstant();
-                    Instant updatedAt = resultSet.getTimestamp(QuizTable.UPDATED_AT).toInstant();
-
-                    return new QuizModel(rsId, title, creator, createdAt, updatedAt);
+                    return QuizMapper.toModel(resultSet);
                 } else {
                     return null;
                 }
