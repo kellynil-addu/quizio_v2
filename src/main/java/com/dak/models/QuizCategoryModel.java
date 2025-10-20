@@ -2,6 +2,7 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.QuizCategoryTable;
+import com.dak.mappers.QuizCategoryMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,19 +37,14 @@ public class QuizCategoryModel {
     public static @NotNull List<QuizCategoryModel> findAll() {
         String query = String.format("SELECT * FROM %s", QuizCategoryTable.TABLE_NAME);
 
-        try (
-                Connection connection = Database.getConnection();
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-        ) {
+        try (Connection connection = Database.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
             ArrayList<QuizCategoryModel> arrayList = new ArrayList<>();
 
             while (resultSet.next()) {
-                arrayList.add(new QuizCategoryModel(
-                        UUID.fromString(resultSet.getString(QuizCategoryTable.ID)),
-                        UUID.fromString(resultSet.getString(QuizCategoryTable.QUIZ_ID)),
-                        UUID.fromString(resultSet.getString(QuizCategoryTable.CATEGORY_ID))
-                ));
+                arrayList.add(QuizCategoryMapper.toModel(resultSet));
             }
 
             return arrayList;
@@ -60,19 +56,14 @@ public class QuizCategoryModel {
     public static @Nullable QuizCategoryModel findById(String id) {
         String query = String.format("SELECT * FROM %s WHERE id = ?", QuizCategoryTable.TABLE_NAME);
 
-        try (
-                Connection connection = Database.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)
-        ) {
+        try (Connection connection = Database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
             preparedStatement.setString(1, id);
 
             try (ResultSet resultSet = preparedStatement.executeQuery();) {
                 if (resultSet.next()) {
-                    UUID rsId = UUID.fromString(resultSet.getString(QuizCategoryTable.ID));
-                    UUID quizId = UUID.fromString(resultSet.getString(QuizCategoryTable.QUIZ_ID));
-                    UUID categoryId = UUID.fromString(resultSet.getString(QuizCategoryTable.CATEGORY_ID));
-
-                    return new QuizCategoryModel(rsId, quizId, categoryId);
+                    return QuizCategoryMapper.toModel(resultSet);
                 } else {
                     return null;
                 }
