@@ -2,6 +2,7 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.QuestionTable;
+import com.dak.mappers.QuestionMapper;
 import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
@@ -60,14 +61,7 @@ public class QuestionModel {
 
             try (ResultSet resultSet = preparedStatement.executeQuery();) {
                 while (resultSet.next()) {
-                    QuestionModel question = new QuestionModel(
-                        UUID.fromString(resultSet.getString(QuestionTable.ID)),
-                        UUID.fromString(resultSet.getString(QuestionTable.QUIZ_ID)),
-                        QuestionModel.TYPE.valueOf(resultSet.getString(QuestionTable.TYPE)),
-                        resultSet.getString(QuestionTable.TEXT)
-                    );
-
-                    arrayList.add(question);
+                    arrayList.add(QuestionMapper.toModel(resultSet));
                 }
             }
 
