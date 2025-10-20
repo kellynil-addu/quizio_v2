@@ -2,8 +2,6 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.QuizTable;
-import com.dak.exceptions.DatabaseReadException;
-import com.dak.exceptions.DatabaseWriteException;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -80,9 +78,10 @@ public class QuizModel {
             preparedStatement.setTimestamp(5, Timestamp.from(this.updatedAt));
             preparedStatement.executeUpdate();
         } catch (SQLException error) {
-            throw new DatabaseWriteException(error.getMessage());
+            throw new RuntimeException(error);
         }
     }
+
     @Contract("_, _ -> new")
     public static @NotNull QuizModel create(String title, String creator) {
         return new QuizModel(UUID.randomUUID(), title, creator, Instant.now(), Instant.now());
@@ -110,7 +109,7 @@ public class QuizModel {
 
             return arrayList;
         } catch (SQLException error) {
-            throw new DatabaseReadException(error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 
@@ -137,7 +136,7 @@ public class QuizModel {
                 }
             }
         } catch (SQLException error) {
-            throw new DatabaseReadException(error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 }

@@ -2,7 +2,6 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.QuizCategoryTable;
-import com.dak.exceptions.DatabaseReadException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,7 +53,7 @@ public class QuizCategoryModel {
 
             return arrayList;
         } catch (SQLException error) {
-            throw new DatabaseReadException(error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 
@@ -79,7 +78,7 @@ public class QuizCategoryModel {
                 }
             }
         } catch (SQLException error) {
-            throw new DatabaseReadException(error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 }

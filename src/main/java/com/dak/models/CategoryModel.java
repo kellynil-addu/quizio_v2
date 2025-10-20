@@ -2,7 +2,6 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.CategoryTable;
-import com.dak.exceptions.DatabaseReadException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,7 +62,7 @@ public class CategoryModel {
 
             return arrayList;
         } catch (SQLException error) {
-            throw new DatabaseReadException(error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 
@@ -88,7 +87,7 @@ public class CategoryModel {
                 }
             }
         } catch (SQLException error) {
-            throw new DatabaseReadException(error.getMessage());
+            throw new RuntimeException(error);
         }
     }
 }
