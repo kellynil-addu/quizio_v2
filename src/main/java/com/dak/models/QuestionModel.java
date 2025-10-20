@@ -1,5 +1,15 @@
 package com.dak.models;
 
+import com.dak.db.Database;
+import com.dak.db.tables.QuestionTable;
+import org.jetbrains.annotations.NotNull;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class QuestionModel {
@@ -37,5 +47,33 @@ public class QuestionModel {
 
     public String getText() {
         return text;
+    }
+
+    public static @NotNull List<QuestionModel> findManyByQuizId(@NotNull UUID quizId) {
+        String query = String.format("SELECT * FROM %s WHERE %s = ?", QuestionTable.TABLE_NAME, QuestionTable.QUIZ_ID);
+
+        try (Connection connection = Database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);) {
+            preparedStatement.setString(1, quizId.toString());
+
+            ArrayList<QuestionModel> arrayList = new ArrayList<>();
+
+            try (ResultSet resultSet = preparedStatement.executeQuery();) {
+                while (resultSet.next()) {
+                    QuestionModel question = new QuestionModel(
+                        UUID.fromString(resultSet.getString(QuestionTable.ID)),
+                        UUID.fromString(resultSet.getString(QuestionTable.QUIZ_ID)),
+                        QuestionModel.TYPE.valueOf(resultSet.getString(QuestionTable.TYPE)),
+                        resultSet.getString(QuestionTable.TEXT)
+                    );
+
+                    arrayList.add(question);
+                }
+            }
+
+            return arrayList;
+        } catch (SQLException error) {
+            throw new RuntimeException(error);
+        }
     }
 }
