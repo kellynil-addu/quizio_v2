@@ -2,6 +2,7 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.CategoryTable;
+import com.dak.mappers.CategoryMapper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -45,19 +46,14 @@ public class CategoryModel {
     public static @NotNull List<CategoryModel> findAll() {
         String query = String.format("SELECT * FROM %s", CategoryTable.TABLE_NAME);
 
-        try (
-                Connection connection = Database.getConnection();
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery(query);
-        ) {
+        try (Connection connection = Database.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
             ArrayList<CategoryModel> arrayList = new ArrayList<>();
 
             while (resultSet.next()) {
-                arrayList.add(new CategoryModel(
-                        UUID.fromString(resultSet.getString(CategoryTable.ID)),
-                        resultSet.getString(CategoryTable.NAME),
-                        resultSet.getString(CategoryTable.IMAGE)
-                ));
+                arrayList.add(CategoryMapper.toModel(resultSet));
             }
 
             return arrayList;
@@ -69,19 +65,14 @@ public class CategoryModel {
     public static @Nullable CategoryModel findById(String id) {
         String query = String.format("SELECT * FROM %s WHERE id = ?", CategoryTable.TABLE_NAME);
 
-        try (
-                Connection connection = Database.getConnection();
-                PreparedStatement preparedStatement = connection.prepareStatement(query)
-        ) {
+        try (Connection connection = Database.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+
             preparedStatement.setString(1, id);
 
             try (ResultSet resultSet = preparedStatement.executeQuery();) {
                 if (resultSet.next()) {
-                    UUID rsId = UUID.fromString(resultSet.getString(CategoryTable.ID));
-                    String name = resultSet.getString(CategoryTable.NAME);
-                    String image = resultSet.getString(CategoryTable.IMAGE);
-
-                    return new CategoryModel(rsId, name, image);
+                    return CategoryMapper.toModel(resultSet);
                 } else {
                     return null;
                 }
