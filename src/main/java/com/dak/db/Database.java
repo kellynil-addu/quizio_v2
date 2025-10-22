@@ -2,6 +2,7 @@ package com.dak.db;
 
 import com.dak.configs.EnvironmentVariable;
 import com.mysql.cj.jdbc.MysqlDataSource;
+import org.flywaydb.core.Flyway;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,5 +21,24 @@ public class Database {
 
     public static Connection getConnection() throws SQLException {
         return dataSource.getConnection();
+    }
+
+    /**
+     * Runs all pending migrations on the database.
+     *
+     * <p>Note: For best practice, consider integrating this functionality as a separate
+     * console command instead of invoking it directly within the application code.</p>
+     */
+    private static void migrate() {
+        Flyway flyway = Flyway.configure()
+            .dataSource(
+                EnvironmentVariable.DATABASE_URL,
+                EnvironmentVariable.DATABASE_USER,
+                EnvironmentVariable.DATABASE_PASSWORD
+            )
+            .locations("classpath:db/migration")
+            .load();
+
+        flyway.migrate();
     }
 }
