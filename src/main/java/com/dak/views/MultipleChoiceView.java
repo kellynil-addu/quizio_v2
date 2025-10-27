@@ -1,7 +1,6 @@
 package com.dak.views;
 
 import com.dak.views.utils.ColorSet;
-import com.dak.views.utils.EmptyIcon;
 import com.dak.views.utils.SizeSet;
 import com.dak.views.vms.MultipleChoiceViewModel;
 import org.jetbrains.annotations.NotNull;

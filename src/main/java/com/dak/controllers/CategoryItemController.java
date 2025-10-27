@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.awt.event.ActionListener;
 
 public record CategoryItemController(CategoryModel model, CategoryItemView view) {
-    public CategoryItemController(CategoryModel model, CategoryItemView view) {
+    public CategoryItemController(CategoryModel model, @NotNull CategoryItemView view) {
         this.model = model;
         this.view = view;
 

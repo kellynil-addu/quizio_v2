@@ -6,7 +6,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.event.ActionListener;
 
-public record NewReleaseItemController(QuizModel model, NewReleaseItemView view) {
+public record NewReleaseItemController(
+    QuizModel model,
+    NewReleaseItemView view
+) {
     public NewReleaseItemController(QuizModel model, @NotNull NewReleaseItemView view) {
         this.model = model;
         this.view = view;

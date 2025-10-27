@@ -1,4 +1,3 @@
 package com.dak.views.vms;
 
-public record SectionHeaderViewModel(String title) {
-}
+public record SectionHeaderViewModel(String title) {}
