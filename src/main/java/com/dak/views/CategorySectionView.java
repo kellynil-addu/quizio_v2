@@ -1,7 +1,7 @@
 package com.dak.views;
 
 import com.dak.views.utils.SizeSet;
-import com.dak.views.vms.CategorySectionViewModel;
+import com.dak.views.viewModels.CategorySectionViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

@@ -1,6 +1,6 @@
 package com.dak.views;
 
-import com.dak.views.vms.HomePageViewModel;
+import com.dak.views.viewModels.HomePageViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

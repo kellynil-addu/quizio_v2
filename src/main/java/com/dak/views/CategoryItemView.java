@@ -2,7 +2,7 @@ package com.dak.views;
 
 import com.dak.views.components.IconButton;
 import com.dak.views.utils.ColorSet;
-import com.dak.views.vms.CategoryItemViewModel;
+import com.dak.views.viewModels.CategoryItemViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

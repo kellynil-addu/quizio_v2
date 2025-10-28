@@ -1,4 +1,4 @@
-package com.dak.views.vms;
+package com.dak.views.viewModels;
 
 import com.dak.views.QuizNavigationView;
 

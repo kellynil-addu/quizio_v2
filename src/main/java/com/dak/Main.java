@@ -1,13 +1,9 @@
 package com.dak;
 
 import java.awt.*;
-import java.util.*;
 
 import javax.swing.*;
 
-import com.dak.controllers.*;
-import com.dak.views.*;
-import com.dak.views.vms.*;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
 

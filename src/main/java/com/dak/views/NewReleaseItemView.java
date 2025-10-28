@@ -3,7 +3,7 @@ package com.dak.views;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.ImageLoader;
 import com.dak.views.utils.SizeSet;
-import com.dak.views.vms.NewReleaseItemViewModel;
+import com.dak.views.viewModels.NewReleaseItemViewModel;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

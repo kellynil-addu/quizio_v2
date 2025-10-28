@@ -1,3 +1,3 @@
-package com.dak.views.vms;
+package com.dak.views.viewModels;
 
 public record SectionHeaderViewModel(String title) {}

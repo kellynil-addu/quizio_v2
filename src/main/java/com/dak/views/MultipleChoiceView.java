@@ -2,7 +2,7 @@ package com.dak.views;
 
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
-import com.dak.views.vms.MultipleChoiceViewModel;
+import com.dak.views.viewModels.MultipleChoiceViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;

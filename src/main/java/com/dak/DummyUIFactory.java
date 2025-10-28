@@ -5,7 +5,7 @@ import com.dak.models.CategoryModel;
 import com.dak.models.QuestionModel;
 import com.dak.models.QuizModel;
 import com.dak.views.*;
-import com.dak.views.vms.*;
+import com.dak.views.viewModels.*;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
