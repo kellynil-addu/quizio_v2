@@ -15,14 +15,6 @@ public class Main {
         contentPane.setBackground(ColorSet.getPrimaryBackground());
         contentPane.setBorder(BorderFactory.createEmptyBorder(SizeSet.XS, SizeSet.XS, SizeSet.XS, SizeSet.XS));
 
-        // Uncomment one at a time to test.
-
-        contentPane.add(DummyUIFactory.homePage());
-        // contentPane.add(DummyUIFactory.fillInBlankPage());
-        // contentPane.add(DummyUIFactory.multipleChoicePage());
-        // contentPane.add(DummyUIFactory.multiSelectPage());
-        // contentPane.add(DummyUIFactory.trueOrFalsePage());
-
         frame.setTitle("Quizio");
         frame.setSize(new Dimension(1200, 800));
         frame.setLocationRelativeTo(null);
