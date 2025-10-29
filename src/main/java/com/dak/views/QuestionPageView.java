@@ -20,7 +20,6 @@ public class QuestionPageView extends JPanel {
         this.questionPageViewModel = questionPageViewModel;
 
         setOpaque(false);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         JPanel cardPanel = new JPanel();
         cardPanel.setOpaque(false);
@@ -30,8 +29,14 @@ public class QuestionPageView extends JPanel {
             cardPanel.add(createQuestion(questionViewModels[i]), String.valueOf(i + 1));
         }
 
+        JPanel mainPanel = new JPanel();
+        mainPanel.setOpaque(false);
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(cardPanel, BorderLayout.CENTER);
+        mainPanel.add(questionPageViewModel.quizNavigationView(), BorderLayout.SOUTH);
+
         add(Box.createVerticalGlue());
-        add(cardPanel);
+        add(mainPanel);
         add(Box.createVerticalGlue());
     }
 
@@ -70,7 +75,6 @@ public class QuestionPageView extends JPanel {
         questionPanel.setLayout(new BorderLayout());
         questionPanel.add(topPanel, BorderLayout.NORTH);
         questionPanel.add(questionViewModel.questionInputView(), BorderLayout.CENTER);
-        questionPanel.add(questionPageViewModel.quizNavigationView(), BorderLayout.SOUTH);
         questionPanel.setMaximumSize(new Dimension(width, questionPanel.getPreferredSize().height));
 
         return questionPanel;
