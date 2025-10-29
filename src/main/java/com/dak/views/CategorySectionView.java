@@ -2,24 +2,27 @@ package com.dak.views;
 
 import com.dak.views.utils.SizeSet;
 import com.dak.views.viewModels.CategorySectionViewModel;
+import com.dak.views.viewModels.SectionHeaderViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class CategorySectionView extends JPanel {
-    private final CategorySectionViewModel viewModel;
+    private final SectionHeaderViewModel sectionHeaderViewModel;
+    private final CategorySectionViewModel categorySectionViewModel;
 
-    public CategorySectionView(@NotNull CategorySectionViewModel viewModel) {
-        this.viewModel = viewModel;
+    public CategorySectionView(@NotNull SectionHeaderViewModel sectionHeaderViewModel, @NotNull CategorySectionViewModel categorySectionViewModel) {
+        this.sectionHeaderViewModel = sectionHeaderViewModel;
+        this.categorySectionViewModel = categorySectionViewModel;
 
         setOpaque(false);
         setLayout(new BorderLayout());
 
         JPanel itemPanel = createItem();
 
-        for (int i = 0; i < viewModel.categoryItemViews().length; i++) {
-            CategoryItemView categoryItemView = viewModel.categoryItemViews()[i];
+        for (int i = 0; i < categorySectionViewModel.categoryItemViews().length; i++) {
+            CategoryItemView categoryItemView = categorySectionViewModel.categoryItemViews()[i];
 
             if (i != 0) {
                 itemPanel.add(Box.createHorizontalStrut(SizeSet._3XS));
@@ -36,7 +39,7 @@ public class CategorySectionView extends JPanel {
     }
 
     private @NotNull SectionHeaderView createHeader() {
-        return new SectionHeaderView(viewModel.sectionHeaderViewModel());
+        return new SectionHeaderView(sectionHeaderViewModel);
     }
 
     private @NotNull JPanel createItem() {

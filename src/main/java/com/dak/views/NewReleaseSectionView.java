@@ -2,16 +2,19 @@ package com.dak.views;
 
 import com.dak.views.utils.SizeSet;
 import com.dak.views.viewModels.NewReleaseSectionViewModel;
+import com.dak.views.viewModels.SectionHeaderViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class NewReleaseSectionView extends JPanel {
-    private final NewReleaseSectionViewModel viewModel;
+    private final SectionHeaderViewModel sectionHeaderViewModel;
+    private final NewReleaseSectionViewModel newReleaseSectionViewModel;
 
-    public NewReleaseSectionView(NewReleaseSectionViewModel viewModel) {
-        this.viewModel = viewModel;
+    public NewReleaseSectionView(SectionHeaderViewModel sectionHeaderViewModel, NewReleaseSectionViewModel newReleaseSectionViewModel) {
+        this.sectionHeaderViewModel = sectionHeaderViewModel;
+        this.newReleaseSectionViewModel = newReleaseSectionViewModel;
 
         setOpaque(false);
         setLayout(new BorderLayout());
@@ -21,7 +24,7 @@ public class NewReleaseSectionView extends JPanel {
     }
 
     private @NotNull SectionHeaderView createHeader() {
-        return new SectionHeaderView(viewModel.sectionHeaderViewModel());
+        return new SectionHeaderView(sectionHeaderViewModel);
     }
 
     private @NotNull JPanel createGrid() {
@@ -32,7 +35,7 @@ public class NewReleaseSectionView extends JPanel {
         gbc.weightx = 1.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        for (int i = 0; i < viewModel.newReleaseCardViews().length; i++) {
+        for (int i = 0; i < newReleaseSectionViewModel.newReleaseCardViews().length; i++) {
             int top = (i == 0 || i == 1) ? 0 : SizeSet._5XS;
             int left = (i % 2 == 0) ? 0 : SizeSet._5XS;
             gbc.insets = new Insets(top, left, SizeSet._5XS, SizeSet._5XS);
@@ -40,7 +43,7 @@ public class NewReleaseSectionView extends JPanel {
             gbc.gridx = i % 2;
             gbc.gridy = i / 2;
 
-            panel.add(viewModel.newReleaseCardViews()[i], gbc);
+            panel.add(newReleaseSectionViewModel.newReleaseCardViews()[i], gbc);
         }
 
         return panel;
