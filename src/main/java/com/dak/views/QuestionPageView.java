@@ -20,6 +20,7 @@ public class QuestionPageView extends JPanel {
         this.questionPageViewModel = questionPageViewModel;
 
         setOpaque(false);
+        setLayout(new GridBagLayout());
 
         JPanel cardPanel = new JPanel();
         cardPanel.setOpaque(false);
@@ -35,9 +36,12 @@ public class QuestionPageView extends JPanel {
         mainPanel.add(cardPanel, BorderLayout.CENTER);
         mainPanel.add(questionPageViewModel.quizNavigationView(), BorderLayout.SOUTH);
 
-        add(Box.createVerticalGlue());
-        add(mainPanel);
-        add(Box.createVerticalGlue());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.CENTER;
+
+        add(mainPanel, gbc);
     }
 
     private @NotNull JPanel createQuestion(@NotNull QuestionViewModel questionViewModel) {
