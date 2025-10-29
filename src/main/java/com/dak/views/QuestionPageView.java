@@ -10,12 +10,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class QuestionPageView extends JPanel {
-    private final QuestionViewModel[] questionViewModels;
     private final QuestionPageViewModel questionPageViewModel;
+    private final QuestionViewModel[] questionViewModels;
 
     private final float textFontSize = (float) SizeSet.M;
 
-    public QuestionPageView(@NotNull QuestionViewModel @NotNull [] questionViewModels, @NotNull QuestionPageViewModel questionPageViewModel) {
+    public QuestionPageView(@NotNull QuestionPageViewModel questionPageViewModel, @NotNull QuestionViewModel @NotNull [] questionViewModels) {
         this.questionViewModels = questionViewModels;
         this.questionPageViewModel = questionPageViewModel;
 
