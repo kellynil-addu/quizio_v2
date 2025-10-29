@@ -10,20 +10,32 @@ import javax.swing.*;
 import java.awt.*;
 
 public class QuestionPageView extends JPanel {
-    private final QuestionViewModel questionViewModel;
+    private final QuestionViewModel[] questionViewModels;
     private final QuestionPageViewModel questionPageViewModel;
 
     private final float textFontSize = (float) SizeSet.M;
 
-    public QuestionPageView(@NotNull QuestionViewModel questionViewModel, @NotNull QuestionPageViewModel questionPageViewModel) {
-        this.questionViewModel = questionViewModel;
+    public QuestionPageView(@NotNull QuestionViewModel @NotNull [] questionViewModels, @NotNull QuestionPageViewModel questionPageViewModel) {
+        this.questionViewModels = questionViewModels;
         this.questionPageViewModel = questionPageViewModel;
 
         setOpaque(false);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        questionViewModel.questionInputView().setBorder(BorderFactory.createEmptyBorder(SizeSet.M, 0, SizeSet.M, 0));
+        JPanel cardPanel = new JPanel();
+        cardPanel.setOpaque(false);
+        cardPanel.setLayout(new CardLayout());
 
+        for (int i = 0; i < questionViewModels.length; i++) {
+            cardPanel.add(createQuestion(questionViewModels[i]), String.valueOf(i + 1));
+        }
+
+        add(Box.createVerticalGlue());
+        add(cardPanel);
+        add(Box.createVerticalGlue());
+    }
+
+    private @NotNull JPanel createQuestion(@NotNull QuestionViewModel questionViewModel) {
         // App currently uses system font only.
         Font systemFont = UIManager.getFont("Label.font");
         FontMetrics metrics = getFontMetrics(systemFont.deriveFont(textFontSize));
@@ -44,24 +56,24 @@ public class QuestionPageView extends JPanel {
             width = maxWidth;
         }
 
+        questionViewModel.questionInputView().setBorder(BorderFactory.createEmptyBorder(SizeSet.M, 0, SizeSet.M, 0));
+
         JPanel topPanel = new JPanel();
         topPanel.setOpaque(false);
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
         topPanel.add(createPage());
         topPanel.add(Box.createVerticalStrut(SizeSet._3XS));
-        topPanel.add(createQuestion());
+        topPanel.add(createQuestion(questionViewModel.text()));
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setOpaque(false);
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(questionViewModel.questionInputView(), BorderLayout.CENTER);
-        mainPanel.add(questionPageViewModel.quizNavigationView(), BorderLayout.SOUTH);
-        mainPanel.setMaximumSize(new Dimension(width, mainPanel.getPreferredSize().height));
+        JPanel questionPanel = new JPanel();
+        questionPanel.setOpaque(false);
+        questionPanel.setLayout(new BorderLayout());
+        questionPanel.add(topPanel, BorderLayout.NORTH);
+        questionPanel.add(questionViewModel.questionInputView(), BorderLayout.CENTER);
+        questionPanel.add(questionPageViewModel.quizNavigationView(), BorderLayout.SOUTH);
+        questionPanel.setMaximumSize(new Dimension(width, questionPanel.getPreferredSize().height));
 
-        add(Box.createVerticalGlue());
-        add(mainPanel);
-        add(Box.createVerticalGlue());
+        return questionPanel;
     }
 
     private @NotNull JLabel createPage() {
@@ -71,10 +83,10 @@ public class QuestionPageView extends JPanel {
         return label;
     }
 
-    private @NotNull JLabel createQuestion() {
+    private @NotNull JLabel createQuestion(String text) {
         String wrappedText = String.format(
             "<html><body style='width: 100%%; text-align: center'>%s</body></html>",
-            questionViewModel.text()
+            text
         );
 
         JLabel label = new JLabel(wrappedText, JLabel.CENTER);
