@@ -68,16 +68,16 @@ INSERT INTO `category`(`id`, `name`, `image`) VALUES
 -- Quiz
 
 INSERT INTO `quiz`(`id`, `title`, `creator`, `created_at`, `updated_at`) VALUES
-(@id_quiz1, 'Java Inheritance and Polymorphism',        'quizio', NOW(), NOW()),
-(@id_quiz2, 'Common Design Patterns in OOP',            'quizio', NOW(), NOW()),
-(@id_quiz3, 'Basic DOM Manipulation with JavaScript',   'quizio', NOW(), NOW()),
-(@id_quiz4, 'Version Control with Git & GitHub',        'quizio', NOW(), NOW()),
-(@id_quiz5, 'Basic CSS Styling',                        'quizio', NOW(), NOW()),
-(@id_quiz6, 'State & Lifecycle: React Fundamentals',    'quizio', NOW(), NOW()),
-(@id_quiz7, 'Vue Composition API',                      'quizio', NOW(), NOW()),
-(@id_quiz8, 'Python Lists, Tuples, and Dictionaries',   'quizio', NOW(), NOW()),
-(@id_quiz9, 'C++ Standard Template Library',            'quizio', NOW(), NOW()),
-(@id_quiz10, 'Ruby Object Oriented Programming',        'quizio', NOW(), NOW());
+(@id_quiz1, 'Java Inheritance and Polymorphism',        'Quizio', NOW(), NOW()),
+(@id_quiz2, 'Common Design Patterns in OOP',            'Quizio', NOW(), NOW()),
+(@id_quiz3, 'Basic DOM Manipulation with JavaScript',   'Quizio', NOW(), NOW()),
+(@id_quiz4, 'Version Control with Git & GitHub',        'Quizio', NOW(), NOW()),
+(@id_quiz5, 'Basic CSS Styling',                        'Quizio', NOW(), NOW()),
+(@id_quiz6, 'State & Lifecycle: React Fundamentals',    'Quizio', NOW(), NOW()),
+(@id_quiz7, 'Vue Composition API',                      'Quizio', NOW(), NOW()),
+(@id_quiz8, 'Python Lists, Tuples, and Dictionaries',   'Quizio', NOW(), NOW()),
+(@id_quiz9, 'C++ Standard Template Library',            'Quizio', NOW(), NOW()),
+(@id_quiz10, 'Ruby Object Oriented Programming',        'Quizio', NOW(), NOW());
 
 -- Quiz Category
 
