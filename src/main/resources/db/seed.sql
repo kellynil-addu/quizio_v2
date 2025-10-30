@@ -50,7 +50,7 @@ INSERT INTO `category`(`id`, `name`, `image`) VALUES
 (@id_category_angular,  'Angular',      'angular.png'),
 (@id_category_cpp,      'C++',          'cpp.png'),
 (@id_category_csharp,   'C#',           'csharp.png'),
-(@id_category_css,      'CSS',          '.png'),
+(@id_category_css,      'CSS',          'css.png'),
 (@id_category_docker,   'Docker',       'docker.png'),
 (@id_category_git,      'Git',          'git.png'),
 (@id_category_github,   'GitHub',       'github.png'),
