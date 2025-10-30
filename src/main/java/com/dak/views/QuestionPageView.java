@@ -13,22 +13,18 @@ public class QuestionPageView extends JPanel {
     private final QuestionPageViewModel questionPageViewModel;
     private final QuestionViewModel[] questionViewModels;
 
+    private final JPanel cardPanel;
+
     private final float textFontSize = (float) SizeSet.M;
 
     public QuestionPageView(@NotNull QuestionPageViewModel questionPageViewModel, @NotNull QuestionViewModel @NotNull [] questionViewModels) {
         this.questionViewModels = questionViewModels;
         this.questionPageViewModel = questionPageViewModel;
 
+        cardPanel = createCard();
+
         setOpaque(false);
         setLayout(new GridBagLayout());
-
-        JPanel cardPanel = new JPanel();
-        cardPanel.setOpaque(false);
-        cardPanel.setLayout(new CardLayout());
-
-        for (int i = 0; i < questionViewModels.length; i++) {
-            cardPanel.add(createQuestion(questionViewModels[i]), String.valueOf(i + 1));
-        }
 
         JPanel mainPanel = new JPanel();
         mainPanel.setOpaque(false);
@@ -44,7 +40,28 @@ public class QuestionPageView extends JPanel {
         add(mainPanel, gbc);
     }
 
-    private @NotNull JPanel createQuestion(@NotNull QuestionViewModel questionViewModel) {
+    public JPanel getCardPanel() {
+        return cardPanel;
+    }
+
+    private @NotNull JPanel createCard() {
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        panel.setLayout(new CardLayout());
+
+        for (int i = 0; i < questionViewModels.length; i++) {
+            String page = String.valueOf(i + 1);
+
+            JLabel pageLabel = createPage();
+            pageLabel.setText(page + "/" + questionPageViewModel.state().maxPage);
+
+            panel.add(createQuestion(questionViewModels[i], pageLabel), page);
+        }
+
+        return panel;
+    }
+
+    private @NotNull JPanel createQuestion(@NotNull QuestionViewModel questionViewModel, JLabel pageLabel) {
         // App currently uses system font only.
         Font systemFont = UIManager.getFont("Label.font");
         FontMetrics metrics = getFontMetrics(systemFont.deriveFont(textFontSize));
@@ -70,7 +87,7 @@ public class QuestionPageView extends JPanel {
         JPanel topPanel = new JPanel();
         topPanel.setOpaque(false);
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
-        topPanel.add(createPage());
+        topPanel.add(pageLabel);
         topPanel.add(Box.createVerticalStrut(SizeSet._3XS));
         topPanel.add(createQuestion(questionViewModel.text()));
 
