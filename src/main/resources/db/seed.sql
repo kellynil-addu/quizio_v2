@@ -47,23 +47,23 @@ SET @id_question10 := UUID();
 -- Category
 
 INSERT INTO `category`(`id`, `name`, `image`) VALUES
-(@id_category_angular,  'Angular',      'angular'),
-(@id_category_cpp,      'C++',          'cpp'),
-(@id_category_csharp,   'C#',           'csharp'),
-(@id_category_css,      'CSS',          'css'),
-(@id_category_docker,   'Docker',       'docker'),
-(@id_category_git,      'Git',          'git'),
-(@id_category_github,   'GitHub',       'github'),
-(@id_category_golang,   'Go',           'golang'),
-(@id_category_html,     'HTML',         'html'),
-(@id_category_java,     'Java',         'java'),
-(@id_category_js,       'JavaScript',   'js'),
-(@id_category_nodejs,   'Node.js',      'nodejs'),
-(@id_category_php,      'PHP',          'php'),
-(@id_category_python,   'Python',       'python'),
-(@id_category_react,    'React',        'react'),
-(@id_category_ruby,     'Ruby',         'ruby'),
-(@id_category_vue,      'Vue',          'vue');
+(@id_category_angular,  'Angular',      'angular.png'),
+(@id_category_cpp,      'C++',          'cpp.png'),
+(@id_category_csharp,   'C#',           'csharp.png'),
+(@id_category_css,      'CSS',          '.png'),
+(@id_category_docker,   'Docker',       'docker.png'),
+(@id_category_git,      'Git',          'git.png'),
+(@id_category_github,   'GitHub',       'github.png'),
+(@id_category_golang,   'Go',           'golang.png'),
+(@id_category_html,     'HTML',         'html.png'),
+(@id_category_java,     'Java',         'java.png'),
+(@id_category_js,       'JavaScript',   'js.png'),
+(@id_category_nodejs,   'Node.js',      'nodejs.png'),
+(@id_category_php,      'PHP',          'php.png'),
+(@id_category_python,   'Python',       'python.png'),
+(@id_category_react,    'React',        'react.png'),
+(@id_category_ruby,     'Ruby',         'ruby.png'),
+(@id_category_vue,      'Vue',          'vue.png');
 
 -- Quiz
 
