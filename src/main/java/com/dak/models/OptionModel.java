@@ -51,7 +51,7 @@ public class OptionModel {
         List<OptionModel> optionModels = new ArrayList<>();
 
         String sql = String.format(
-            "SELECT * FROM %s WHERE %s = ?",
+            "SELECT * FROM `%s` WHERE %s = ?",
             OptionTable.TABLE_NAME,
             OptionTable.QUESTION_ID
         );
