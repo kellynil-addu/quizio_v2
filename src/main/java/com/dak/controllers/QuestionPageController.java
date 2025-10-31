@@ -1,13 +1,14 @@
 package com.dak.controllers;
 
+import com.dak.events.subscribers.NewReleaseItemSubscriber;
 import com.dak.events.subscribers.QuizNavigationSubscriber;
 import com.dak.states.QuizNavigationState;
-import com.dak.views.QuestionPageView;
+import com.dak.views.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class QuestionPageController extends QuizNavigationSubscriber {
+public class QuestionPageController implements QuizNavigationSubscriber, NewReleaseItemSubscriber {
     private final QuestionPageView view;
 
     public QuestionPageController(QuestionPageView view) {
@@ -19,7 +20,8 @@ public class QuestionPageController extends QuizNavigationSubscriber {
     }
 
     private void showCurrentPage(int currentPage) {
-        ((CardLayout) view.getCardPanel().getLayout()).show(view.getCardPanel(), String.valueOf(currentPage));
+        CardLayout cardLayout = (CardLayout) view.getCardPanel().getLayout();
+        cardLayout.show(view.getCardPanel(), String.valueOf(currentPage));
     }
 
     @Override
@@ -30,5 +32,10 @@ public class QuestionPageController extends QuizNavigationSubscriber {
     @Override
     public void onPrevious(@NotNull QuizNavigationState state) {
         showCurrentPage(state.currentPage);
+    }
+
+    @Override
+    public void onPlay(String quizId) {
+        System.out.println(quizId);
     }
 }
