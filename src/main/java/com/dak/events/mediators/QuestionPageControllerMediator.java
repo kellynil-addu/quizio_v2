@@ -2,7 +2,7 @@ package com.dak.events.mediators;
 
 import com.dak.Main;
 import com.dak.constants.AppConstants;
-import com.dak.contracts.QuestionInput;
+import com.dak.contracts.QuestionInputContract;
 import com.dak.controllers.*;
 import com.dak.events.subscribers.NewReleaseItemSubscriber;
 import com.dak.models.OptionModel;
@@ -33,7 +33,7 @@ public class QuestionPageControllerMediator implements NewReleaseItemSubscriber 
         List<QuestionViewModel> questionViewModels = new ArrayList<>();
 
         for (QuestionModel questionModel : questionModels) {
-            QuestionInput questionInputView;
+            QuestionInputContract questionInputView;
 
             switch (questionModel.getType()) {
                 case QuestionModel.TYPE.FILL_IN_THE_BLANK -> {

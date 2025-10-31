@@ -1,6 +1,6 @@
 package com.dak.views;
 
-import com.dak.contracts.QuestionInput;
+import com.dak.contracts.QuestionInputContract;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
 import com.dak.views.viewModels.MultiSelectViewModel;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.awt.*;
 
-public class MultiSelectView extends QuestionInput {
+public class MultiSelectView extends QuestionInputContract {
     public MultiSelectView(@NotNull MultiSelectViewModel viewModel) {
         setOpaque(false);
         setLayout(new GridLayout(4, 1, 0, SizeSet.M));

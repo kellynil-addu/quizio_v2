@@ -1,6 +1,6 @@
 package com.dak.views;
 
-import com.dak.contracts.QuestionInput;
+import com.dak.contracts.QuestionInputContract;
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.EmptyIcon;
 import com.dak.views.utils.SizeSet;
@@ -10,7 +10,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 
-public class TrueOrFalseView extends QuestionInput {
+public class TrueOrFalseView extends QuestionInputContract {
     private final ButtonGroup buttonGroup = new ButtonGroup();
 
     private final JRadioButton trueButton;
