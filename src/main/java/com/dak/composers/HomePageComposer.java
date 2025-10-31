@@ -1,12 +1,11 @@
 package com.dak.composers;
 
-import com.dak.Main;
 import com.dak.controllers.CategoryItemController;
 import com.dak.controllers.NewReleaseItemController;
 import com.dak.db.Database;
 import com.dak.db.tables.CategoryTable;
 import com.dak.db.tables.QuizCategoryTable;
-import com.dak.events.proxies.QuestionPageControllerProxySubscriber;
+import com.dak.events.mediators.QuestionPageControllerMediator;
 import com.dak.models.CategoryModel;
 import com.dak.models.QuizModel;
 import com.dak.views.*;
@@ -120,7 +119,7 @@ public class HomePageComposer {
             NewReleaseItemView newReleaseItemView = new NewReleaseItemView(newReleaseItemViewModel);
             NewReleaseItemController newReleaseItemController = new NewReleaseItemController(quizModel, newReleaseItemView);
 
-            QuestionPageControllerProxySubscriber questionPageControllerProxySubscriber = new QuestionPageControllerProxySubscriber();
+            QuestionPageControllerMediator questionPageControllerProxySubscriber = new QuestionPageControllerMediator();
             newReleaseItemController.addSubscriber(questionPageControllerProxySubscriber);
 
             newReleaseItemViews.add(newReleaseItemView);

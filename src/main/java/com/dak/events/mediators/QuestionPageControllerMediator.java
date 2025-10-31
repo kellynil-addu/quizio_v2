@@ -1,4 +1,4 @@
-package com.dak.events.proxies;
+package com.dak.events.mediators;
 
 import com.dak.Main;
 import com.dak.constants.AppConstants;
@@ -18,7 +18,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionPageControllerProxySubscriber implements NewReleaseItemSubscriber {
+public class QuestionPageControllerMediator implements NewReleaseItemSubscriber {
     @Override
     public void onPlay(String quizId) {
         List<QuestionModel> questionModels = QuestionModel.findManyByQuizId(quizId);
