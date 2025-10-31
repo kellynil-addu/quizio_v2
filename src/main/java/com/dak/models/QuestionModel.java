@@ -50,12 +50,12 @@ public class QuestionModel {
         return text;
     }
 
-    public static @NotNull List<QuestionModel> findManyByQuizId(@NotNull UUID quizId) {
+    public static @NotNull List<QuestionModel> findManyByQuizId(@NotNull String quizId) {
         String query = String.format("SELECT * FROM %s WHERE %s = ?", QuestionTable.TABLE_NAME, QuestionTable.QUIZ_ID);
 
         try (Connection connection = Database.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);) {
-            preparedStatement.setString(1, quizId.toString());
+            preparedStatement.setString(1, quizId);
 
             ArrayList<QuestionModel> arrayList = new ArrayList<>();
 
