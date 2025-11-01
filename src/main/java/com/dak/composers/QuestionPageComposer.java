@@ -1,5 +1,6 @@
 package com.dak.composers;
 
+import com.dak.constants.AppConstants;
 import com.dak.contracts.QuestionInputContract;
 import com.dak.controllers.*;
 import com.dak.models.OptionModel;
@@ -75,7 +76,10 @@ public class QuestionPageComposer {
                 default -> throw new IllegalArgumentException("Unhandled question model type: " + questionModel.getType());
             }
 
-            QuestionViewModel questionViewModel = new QuestionViewModel(questionModel.getText(), questionInputView);
+            // TODO: Change underline length to answer length.
+            String text = questionModel.getText().replace(AppConstants.QUESTION_BLANK_DELIMITER, "__________");
+
+            QuestionViewModel questionViewModel = new QuestionViewModel(text, questionInputView);
             questionViewModels.add(questionViewModel);
         }
 
