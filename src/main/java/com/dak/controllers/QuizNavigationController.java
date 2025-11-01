@@ -31,6 +31,10 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
 
     private @NotNull ActionListener createPreviousButtonActionListener() {
         return (e) -> {
+            if (state.currentPage == 1) {
+                return;
+            }
+
             state.currentPage -= 1;
             notifySubscribers(QuizNavigationEvent.PREVIOUS);
         };
@@ -38,6 +42,10 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
 
     private @NotNull ActionListener createNextButtonActionListener() {
         return (e) -> {
+            if (state.currentPage == state.maxPage) {
+                return;
+            }
+
             state.currentPage += 1;
             notifySubscribers(QuizNavigationEvent.NEXT);
         };
