@@ -109,6 +109,8 @@ public class HomePageComposer {
 
         List<NewReleaseItemView> newReleaseItemViews = new ArrayList<>();
 
+        QuestionPageControllerMediator questionPageControllerMediator = new QuestionPageControllerMediator();
+
         for (QuizModel quizModel : quizModels) {
             NewReleaseItemViewModel newReleaseItemViewModel = new NewReleaseItemViewModel(
                     quizModel.getTitle(),
@@ -119,8 +121,7 @@ public class HomePageComposer {
             NewReleaseItemView newReleaseItemView = new NewReleaseItemView(newReleaseItemViewModel);
             NewReleaseItemController newReleaseItemController = new NewReleaseItemController(quizModel, newReleaseItemView);
 
-            QuestionPageControllerMediator questionPageControllerProxySubscriber = new QuestionPageControllerMediator();
-            newReleaseItemController.addSubscriber(questionPageControllerProxySubscriber);
+            newReleaseItemController.addSubscriber(questionPageControllerMediator);
 
             newReleaseItemViews.add(newReleaseItemView);
         }
