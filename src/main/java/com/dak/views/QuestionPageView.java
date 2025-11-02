@@ -8,18 +8,22 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class QuestionPageView extends JPanel {
     private final QuestionPageViewModel questionPageViewModel;
     private final QuestionViewModel[] questionViewModels;
 
     private final JPanel cardPanel;
+    
+    private final ArrayList<JPanel> questionPages;
 
     private final float textFontSize = (float) SizeSet.M;
 
     public QuestionPageView(@NotNull QuestionPageViewModel questionPageViewModel, @NotNull QuestionViewModel @NotNull [] questionViewModels) {
         this.questionViewModels = questionViewModels;
         this.questionPageViewModel = questionPageViewModel;
+        this.questionPages = new ArrayList<>();
 
         cardPanel = createCard();
 
@@ -38,16 +42,21 @@ public class QuestionPageView extends JPanel {
         gbc.anchor = GridBagConstraints.CENTER;
 
         add(mainPanel, gbc);
+
+        showPage(0);
     }
 
-    public JPanel getCardPanel() {
-        return cardPanel;
+    public void showPage(int page) {
+        cardPanel.removeAll();
+        cardPanel.add(questionPages.get(page));
+
+        this.revalidate();
+        this.repaint();
     }
 
     private @NotNull JPanel createCard() {
         JPanel panel = new JPanel();
         panel.setOpaque(false);
-        panel.setLayout(new CardLayout());
 
         for (int i = 0; i < questionViewModels.length; i++) {
             String page = String.valueOf(i + 1);
@@ -55,7 +64,7 @@ public class QuestionPageView extends JPanel {
             JLabel pageLabel = createPageLabel();
             pageLabel.setText(page + "/" + questionPageViewModel.state().maxPage);
 
-            panel.add(createQuestion(questionViewModels[i], pageLabel), page);
+            questionPages.add(createQuestion(questionViewModels[i], pageLabel));
         }
 
         return panel;

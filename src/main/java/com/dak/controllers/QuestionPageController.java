@@ -19,19 +19,14 @@ public class QuestionPageController implements QuizNavigationSubscriber, NewRele
         return view;
     }
 
-    private void showCurrentPage(int currentPage) {
-        CardLayout cardLayout = (CardLayout) view.getCardPanel().getLayout();
-        cardLayout.show(view.getCardPanel(), String.valueOf(currentPage));
-    }
-
     @Override
     public void onNext(@NotNull QuizNavigationState state) {
-        showCurrentPage(state.currentPage);
+        view.showPage(state.currentPage);
     }
 
     @Override
     public void onPrevious(@NotNull QuizNavigationState state) {
-        showCurrentPage(state.currentPage);
+        view.showPage(state.currentPage);
     }
 
     @Override
