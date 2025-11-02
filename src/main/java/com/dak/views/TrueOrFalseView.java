@@ -42,6 +42,7 @@ public class TrueOrFalseView extends QuestionInputContract {
     private @NotNull JRadioButton createButton(String text) {
         JRadioButton option = new JRadioButton(text);
         option.setOpaque(false);
+        option.setFocusPainted(false);
         option.setIcon(new EmptyIcon());
         option.setSelectedIcon(new EmptyIcon());
         option.setHorizontalAlignment(SwingConstants.CENTER);

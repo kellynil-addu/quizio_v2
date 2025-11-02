@@ -23,6 +23,7 @@ public class MultiSelectView extends QuestionInputContract {
     private @NotNull JPanel createOption(String text) {
         JCheckBox option = new JCheckBox(text);
         option.setOpaque(false);
+        option.setFocusPainted(false);
         option.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         option.setBorder(BorderFactory.createEmptyBorder(SizeSet._3XS, SizeSet._3XS, SizeSet._3XS, SizeSet._3XS));
 
