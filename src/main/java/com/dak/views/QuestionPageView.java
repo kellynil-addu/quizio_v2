@@ -4,9 +4,16 @@ import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
 import com.dak.views.viewModels.QuestionPageViewModel;
 import com.dak.views.viewModels.QuestionViewModel;
+
+import net.miginfocom.swing.MigLayout;
+
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -105,7 +112,6 @@ public class QuestionPageView extends JPanel {
         questionPanel.setLayout(new BorderLayout());
         questionPanel.add(topPanel, BorderLayout.NORTH);
         questionPanel.add(questionViewModel.questionInputView(), BorderLayout.CENTER);
-        questionPanel.setMaximumSize(new Dimension(width, questionPanel.getPreferredSize().height));
 
         return questionPanel;
     }
@@ -117,16 +123,29 @@ public class QuestionPageView extends JPanel {
         return label;
     }
 
-    private @NotNull JLabel createQuestion(String text) {
-        String wrappedText = String.format(
-            "<html><body style='width: 100%%; text-align: center'>%s</body></html>",
-            text
-        );
+    private @NotNull JPanel createQuestion(String text) {
+        JPanel wrapper = new JPanel();
+        wrapper.setLayout(new MigLayout("insets 0, gap 0", "[shrink]", "[shrink]"));
 
-        JLabel label = new JLabel(wrappedText, JLabel.CENTER);
-        label.setForeground(ColorSet.getPrimaryForeground());
-        label.setFont(label.getFont().deriveFont(Font.BOLD, textFontSize));
+        JTextPane textPane = new JTextPane();
+        textPane.setEditable(false);
+        textPane.setText(text);
+        textPane.setForeground(ColorSet.getPrimaryForeground());
+        textPane.setFont(textPane.getFont().deriveFont(Font.BOLD, textFontSize));
 
-        return label;
+        StyledDocument document = textPane.getStyledDocument();
+        SimpleAttributeSet attributes = new SimpleAttributeSet();
+        StyleConstants.setAlignment(attributes, StyleConstants.ALIGN_CENTER);
+        document.setParagraphAttributes(0, document.getLength(), attributes, false);
+
+        textPane.setMaximumSize(new Dimension(500, Integer.MAX_VALUE));
+        textPane.setMinimumSize(new Dimension(300, 0));
+
+        // Force a recalculation of the dimensions of textPane
+        textPane.setSize(new Dimension(500, Short.MAX_VALUE));
+
+        wrapper.add(textPane);
+
+        return wrapper;
     }
 }
