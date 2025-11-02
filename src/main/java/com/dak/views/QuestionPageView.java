@@ -52,7 +52,7 @@ public class QuestionPageView extends JPanel {
         for (int i = 0; i < questionViewModels.length; i++) {
             String page = String.valueOf(i + 1);
 
-            JLabel pageLabel = createPage();
+            JLabel pageLabel = createPageLabel();
             pageLabel.setText(page + "/" + questionPageViewModel.state().maxPage);
 
             panel.add(createQuestion(questionViewModels[i], pageLabel), page);
@@ -101,7 +101,7 @@ public class QuestionPageView extends JPanel {
         return questionPanel;
     }
 
-    private @NotNull JLabel createPage() {
+    private @NotNull JLabel createPageLabel() {
         JLabel label = new JLabel("1/10", JLabel.CENTER);
         label.setMaximumSize(new Dimension(Integer.MAX_VALUE, label.getPreferredSize().height));
 
