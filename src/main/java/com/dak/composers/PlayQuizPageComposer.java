@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionPageComposer {
+public class PlayQuizPageComposer {
     public static @NotNull QuestionPageView createQuestionPage(String quizId) {
         List<QuestionModel> questionModels = QuestionModel.findManyByQuizId(quizId);
 
@@ -84,9 +84,9 @@ public class QuestionPageComposer {
         }
 
         QuestionPageView questionPageView = new QuestionPageView(questionPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
-        QuestionPageController questionPageController = new QuestionPageController(questionPageView);
+        PlayQuizPageController playQuizPageController = new PlayQuizPageController(questionPageView);
 
-        quizNavigationController.addSubscriber(questionPageController);
+        quizNavigationController.addSubscriber(playQuizPageController);
 
         return questionPageView;
     }

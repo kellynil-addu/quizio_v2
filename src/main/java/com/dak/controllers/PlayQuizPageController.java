@@ -8,10 +8,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class QuestionPageController implements QuizNavigationSubscriber, NewReleaseItemSubscriber {
+public class PlayQuizPageController implements QuizNavigationSubscriber, NewReleaseItemSubscriber {
     private final QuestionPageView view;
 
-    public QuestionPageController(QuestionPageView view) {
+    public PlayQuizPageController(QuestionPageView view) {
         this.view = view;
     }
 

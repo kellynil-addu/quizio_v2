@@ -5,7 +5,7 @@ import com.dak.controllers.NewReleaseItemController;
 import com.dak.db.Database;
 import com.dak.db.tables.CategoryTable;
 import com.dak.db.tables.QuizCategoryTable;
-import com.dak.events.mediators.QuestionPageControllerMediator;
+import com.dak.events.mediators.PlayQuizPageControllerMediator;
 import com.dak.models.CategoryModel;
 import com.dak.models.QuizModel;
 import com.dak.views.*;
@@ -109,7 +109,7 @@ public class HomePageComposer {
 
         List<NewReleaseItemView> newReleaseItemViews = new ArrayList<>();
 
-        QuestionPageControllerMediator questionPageControllerMediator = new QuestionPageControllerMediator();
+        PlayQuizPageControllerMediator playQuizPageControllerMediator = new PlayQuizPageControllerMediator();
 
         for (QuizModel quizModel : quizModels) {
             NewReleaseItemViewModel newReleaseItemViewModel = new NewReleaseItemViewModel(
@@ -121,7 +121,7 @@ public class HomePageComposer {
             NewReleaseItemView newReleaseItemView = new NewReleaseItemView(newReleaseItemViewModel);
             NewReleaseItemController newReleaseItemController = new NewReleaseItemController(quizModel, newReleaseItemView);
 
-            newReleaseItemController.addSubscriber(questionPageControllerMediator);
+            newReleaseItemController.addSubscriber(playQuizPageControllerMediator);
 
             newReleaseItemViews.add(newReleaseItemView);
         }
