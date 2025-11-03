@@ -6,10 +6,11 @@ import com.dak.controllers.*;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
 import com.dak.states.QuizNavigationState;
+import com.dak.states.QuizSessionState;
 import com.dak.views.*;
 import com.dak.views.viewModels.MultiSelectViewModel;
 import com.dak.views.viewModels.MultipleChoiceViewModel;
-import com.dak.views.viewModels.QuestionPageViewModel;
+import com.dak.views.viewModels.PlayQuizPageViewModel;
 import com.dak.views.viewModels.QuestionViewModel;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayQuizPageComposer {
-    public static @NotNull QuestionPageView createQuestionPage(String quizId) {
+    public static @NotNull PlayQuizPageView createPlayQuizPage(String quizId) {
         List<QuestionModel> questionModels = QuestionModel.findManyByQuizId(quizId);
 
         QuizNavigationState quizNavigationState = new QuizNavigationState(1, questionModels.size());
@@ -25,7 +26,7 @@ public class PlayQuizPageComposer {
         QuizNavigationView quizNavigationView = new QuizNavigationView();
         QuizNavigationController quizNavigationController = new QuizNavigationController(quizNavigationView, quizNavigationState);
 
-        QuestionPageViewModel questionPageViewModel = new QuestionPageViewModel(quizNavigationView, quizNavigationState);
+        PlayQuizPageViewModel playQuizPageViewModel = new PlayQuizPageViewModel(quizNavigationView, quizNavigationState);
 
         List<QuestionViewModel> questionViewModels = new ArrayList<>();
 
@@ -83,11 +84,12 @@ public class PlayQuizPageComposer {
             questionViewModels.add(questionViewModel);
         }
 
-        QuestionPageView questionPageView = new QuestionPageView(questionPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
-        PlayQuizPageController playQuizPageController = new PlayQuizPageController(questionPageView);
+        PlayQuizPageView playQuizPageView = new PlayQuizPageView(playQuizPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
+        QuizSessionState quizSessionState = new QuizSessionState(questionViewModels.size());
+        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, quizSessionState);
 
         quizNavigationController.addSubscriber(playQuizPageController);
 
-        return questionPageView;
+        return playQuizPageView;
     }
 }

@@ -2,24 +2,22 @@ package com.dak.views;
 
 import com.dak.views.utils.ColorSet;
 import com.dak.views.utils.SizeSet;
-import com.dak.views.viewModels.QuestionPageViewModel;
+import com.dak.views.viewModels.PlayQuizPageViewModel;
 import com.dak.views.viewModels.QuestionViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class QuestionPageView extends JPanel {
-    private final QuestionPageViewModel questionPageViewModel;
+public class PlayQuizPageView extends JPanel {
+    private final PlayQuizPageViewModel playQuizPageViewModel;
     private final QuestionViewModel[] questionViewModels;
 
     private final JPanel cardPanel;
 
-    private final float textFontSize = (float) SizeSet.M;
-
-    public QuestionPageView(@NotNull QuestionPageViewModel questionPageViewModel, @NotNull QuestionViewModel @NotNull [] questionViewModels) {
+    public PlayQuizPageView(@NotNull PlayQuizPageViewModel questionPageViewModel, @NotNull QuestionViewModel @NotNull [] questionViewModels) {
         this.questionViewModels = questionViewModels;
-        this.questionPageViewModel = questionPageViewModel;
+        this.playQuizPageViewModel = questionPageViewModel;
 
         cardPanel = createCard();
 
@@ -70,7 +68,7 @@ public class QuestionPageView extends JPanel {
             String page = String.valueOf(i + 1);
 
             JLabel pageLabel = createPage();
-            pageLabel.setText(page + "/" + questionPageViewModel.state().maxPage);
+            pageLabel.setText(page + "/" + playQuizPageViewModel.quizNavigationState().maxPage);
 
             panel.add(createQuestion(questionViewModels[i], pageLabel), page);
         }
@@ -128,7 +126,7 @@ public class QuestionPageView extends JPanel {
 
         JLabel label = new JLabel(wrappedText, JLabel.CENTER);
         label.setForeground(ColorSet.getPrimaryForeground());
-        label.setFont(label.getFont().deriveFont(Font.BOLD, textFontSize));
+        label.setFont(label.getFont().deriveFont(Font.BOLD, (float) SizeSet.M));
 
         return label;
     }

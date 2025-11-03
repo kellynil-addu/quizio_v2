@@ -11,7 +11,7 @@ import java.awt.*;
 public class PlayQuizPageControllerMediator implements NewReleaseItemSubscriber {
     @Override
     public void onPlay(String quizId) {
-        QuestionPageView questionPageView = PlayQuizPageComposer.createQuestionPage(quizId);
+        PlayQuizPageView questionPageView = PlayQuizPageComposer.createPlayQuizPage(quizId);
 
         Main.cardPanel.add(questionPageView, AppConstants.QUESTION_PAGE);
         ((CardLayout) Main.cardPanel.getLayout()).show(Main.cardPanel, AppConstants.QUESTION_PAGE);
