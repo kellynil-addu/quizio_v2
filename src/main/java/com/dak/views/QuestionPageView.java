@@ -47,7 +47,24 @@ public class QuestionPageView extends JPanel {
     private @NotNull JPanel createCard() {
         JPanel panel = new JPanel();
         panel.setOpaque(false);
-        panel.setLayout(new CardLayout());
+        panel.setLayout(new CardLayout() {
+            @Override
+            public Dimension preferredLayoutSize(Container parent) {
+                Component current = null;
+
+                for (Component comp : parent.getComponents()) {
+                    if (comp.isVisible()) {
+                        current = comp;
+                    }
+                }
+
+                if (current != null) {
+                    return new Dimension(current.getMaximumSize().width, current.getPreferredSize().height);
+                }
+
+                return super.preferredLayoutSize(parent);
+            }
+        });
 
         for (int i = 0; i < questionViewModels.length; i++) {
             String page = String.valueOf(i + 1);
@@ -62,22 +79,17 @@ public class QuestionPageView extends JPanel {
     }
 
     private @NotNull JPanel createQuestion(@NotNull QuestionViewModel questionViewModel, JLabel pageLabel) {
-        // App currently uses system font only.
-        Font systemFont = UIManager.getFont("Label.font");
-        FontMetrics metrics = getFontMetrics(systemFont.deriveFont(textFontSize));
-
-        int minTextLength = 40;
-        int maxTextLength = 80;
         int minWidth = 300;
-        int maxWidth = 500;
+        int maxWidth = 700;
         int width;
 
-        int textLength = questionViewModel.text().length();
+        JLabel title = createTitle(questionViewModel.text());
+        int titleWidth = title.getPreferredSize().width;
 
-        if (textLength < minTextLength) {
+        if (titleWidth < minWidth) {
             width = minWidth;
-        } else if (textLength < maxTextLength) {
-            width = metrics.stringWidth(questionViewModel.text());
+        } else if (titleWidth <= 700) {
+            width = title.getPreferredSize().width;
         } else {
             width = maxWidth;
         }
@@ -89,7 +101,7 @@ public class QuestionPageView extends JPanel {
         topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
         topPanel.add(pageLabel);
         topPanel.add(Box.createVerticalStrut(SizeSet._3XS));
-        topPanel.add(createQuestion(questionViewModel.text()));
+        topPanel.add(title);
 
         JPanel questionPanel = new JPanel();
         questionPanel.setOpaque(false);
@@ -108,7 +120,7 @@ public class QuestionPageView extends JPanel {
         return label;
     }
 
-    private @NotNull JLabel createQuestion(String text) {
+    private @NotNull JLabel createTitle(String text) {
         String wrappedText = String.format(
             "<html><body style='width: 100%%; text-align: center'>%s</body></html>",
             text
