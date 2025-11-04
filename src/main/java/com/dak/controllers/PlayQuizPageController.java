@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class PlayQuizPageController implements QuizNavigationSubscriber, NewReleaseItemSubscriber {
+public class PlayQuizPageController implements QuizNavigationSubscriber {
     private final PlayQuizPageView view;
     private final QuizSessionState state;
 
@@ -39,10 +39,5 @@ public class PlayQuizPageController implements QuizNavigationSubscriber, NewRele
     @Override
     public void onPrevious(@NotNull QuizNavigationState state) {
         showCurrentPage(state.currentPage);
-    }
-
-    @Override
-    public void onPlay(String quizId) {
-        System.out.println(quizId);
     }
 }
