@@ -1,8 +1,8 @@
 package com.dak.views.viewModels;
 
-import com.dak.contracts.QuestionInputContract;
+import com.dak.bases.BaseQuestionView;
 
 public record QuestionViewModel(
     String text,
-    QuestionInputContract questionInputView
+    BaseQuestionView questionView
 ) {}

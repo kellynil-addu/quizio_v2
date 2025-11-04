@@ -92,7 +92,7 @@ public class PlayQuizPageView extends JPanel {
             width = maxWidth;
         }
 
-        questionViewModel.questionInputView().setBorder(BorderFactory.createEmptyBorder(SizeSet.M, 0, SizeSet.M, 0));
+        questionViewModel.questionView().setBorder(BorderFactory.createEmptyBorder(SizeSet.M, 0, SizeSet.M, 0));
 
         JPanel topPanel = new JPanel();
         topPanel.setOpaque(false);
@@ -105,7 +105,7 @@ public class PlayQuizPageView extends JPanel {
         questionPanel.setOpaque(false);
         questionPanel.setLayout(new BorderLayout());
         questionPanel.add(topPanel, BorderLayout.NORTH);
-        questionPanel.add(questionViewModel.questionInputView(), BorderLayout.CENTER);
+        questionPanel.add(questionViewModel.questionView(), BorderLayout.CENTER);
         questionPanel.setMaximumSize(new Dimension(width, questionPanel.getPreferredSize().height));
 
         return questionPanel;
