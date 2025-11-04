@@ -269,4 +269,4 @@ INSERT INTO `option`(`id`, `question_id`, `is_correct`, `text`) VALUES
 
 (UUID(), @id_question29, TRUE, NULL),
 
-(UUID(), @id_question30, FALSE, NULL),
+(UUID(), @id_question30, FALSE, NULL);
