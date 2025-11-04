@@ -98,14 +98,8 @@ public class BaseQuestionController<TView> extends EventPublisher<QuestionSubscr
                     }
 
                     answer = answers.toString();
-                }
-
-                if (view instanceof MultipleChoiceView) {
+                } else {
                     answer = component.getText();
-                }
-
-                if (view instanceof TrueOrFalseView) {
-                    answer = component.getText().toLowerCase();
                 }
             } else {
                 throw new IllegalArgumentException("Unexpected event source: " + source);
