@@ -4,15 +4,25 @@ import com.dak.events.EventPublisher;
 import com.dak.events.enums.QuestionEvent;
 import com.dak.events.subscribers.QuestionSubscriber;
 import com.dak.models.QuestionModel;
+import com.dak.views.MultiSelectView;
+import com.dak.views.MultipleChoiceView;
+import com.dak.views.TrueOrFalseView;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BaseQuestionController<TView> extends EventPublisher<QuestionSubscriber, QuestionEvent> {
     private final QuestionModel model;
     private final TView view;
+
+    protected String answer;
 
     public BaseQuestionController(QuestionModel model, TView view) {
         this.model = model;
@@ -22,7 +32,7 @@ public class BaseQuestionController<TView> extends EventPublisher<QuestionSubscr
     @Override
     protected void notifyHandler(QuestionSubscriber subscriber, QuestionEvent event) {
         if (event == QuestionEvent.INPUT) {
-            subscriber.onInput();
+            subscriber.onInput(answer);
         } else {
             throw new IllegalArgumentException("Unhandled event case: " + event);
         }
@@ -32,22 +42,76 @@ public class BaseQuestionController<TView> extends EventPublisher<QuestionSubscr
         return new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                notifySubscribers(QuestionEvent.INPUT);
+                handleInput(e);
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                notifySubscribers(QuestionEvent.INPUT);
+                handleInput(e);
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 // Do nothing
             }
+
+            private void handleInput(@NotNull DocumentEvent e) {
+                Document document = e.getDocument();
+
+                try {
+                    answer = document.getText(0, document.getLength());
+                    notifySubscribers(QuestionEvent.INPUT);
+                } catch (BadLocationException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         };
     }
 
     protected ActionListener createComponentActionListener() {
-        return e -> notifySubscribers(QuestionEvent.INPUT);
+        return e -> {
+            Object source = e.getSource();
+
+            if (source instanceof AbstractButton component) {
+                if (view instanceof MultiSelectView concreteView) {
+                    List<String> answers = new ArrayList<>();
+
+                    JCheckBox optionOne = concreteView.getOptionOne();
+                    JCheckBox optionTwo = concreteView.getOptionTwo();
+                    JCheckBox optionThree = concreteView.getOptionThree();
+                    JCheckBox optionFour = concreteView.getOptionFour();
+
+                    if (optionOne.isSelected()) {
+                        answers.add(optionOne.getText());
+                    }
+
+                    if (optionTwo.isSelected()) {
+                        answers.add(optionTwo.getText());
+                    }
+
+                    if (optionThree.isSelected()) {
+                        answers.add(optionThree.getText());
+                    }
+
+                    if (optionFour.isSelected()) {
+                        answers.add(optionFour.getText());
+                    }
+
+                    answer = answers.toString();
+                }
+
+                if (view instanceof MultipleChoiceView) {
+                    answer = component.getText();
+                }
+
+                if (view instanceof TrueOrFalseView) {
+                    answer = component.getText().toLowerCase();
+                }
+            } else {
+                throw new IllegalArgumentException("Unexpected event source: " + source);
+            }
+
+            notifySubscribers(QuestionEvent.INPUT);
+        };
     }
 }

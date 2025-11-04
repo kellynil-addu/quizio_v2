@@ -42,7 +42,7 @@ public class PlayQuizPageController implements QuizNavigationSubscriber, Questio
     }
 
     @Override
-    public void onInput() {
-        System.out.println("Input!");
+    public void onInput(String answer) {
+        System.out.println(answer);
     }
 }
