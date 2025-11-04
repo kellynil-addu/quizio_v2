@@ -1,5 +1,6 @@
 package com.dak.controllers;
 
+import com.dak.enums.QuestionType;
 import com.dak.events.subscribers.QuestionSubscriber;
 import com.dak.events.subscribers.QuizNavigationSubscriber;
 import com.dak.models.OptionModel;
@@ -50,7 +51,7 @@ public class PlayQuizPageController implements QuizNavigationSubscriber, Questio
     }
 
     @Override
-    public void onInput(String answer) {
+    public void onInput(String answer, QuestionType type) {
         System.out.println(answer);
     }
 }
