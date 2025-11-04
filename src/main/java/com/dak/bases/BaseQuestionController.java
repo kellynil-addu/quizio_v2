@@ -5,8 +5,6 @@ import com.dak.events.enums.QuestionEvent;
 import com.dak.events.subscribers.QuestionSubscriber;
 import com.dak.models.QuestionModel;
 import com.dak.views.MultiSelectView;
-import com.dak.views.MultipleChoiceView;
-import com.dak.views.TrueOrFalseView;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
