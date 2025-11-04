@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class QuizSessionState {
-    public Map<QuestionModel, List<OptionModel>> options;
+    public final Map<QuestionModel, List<OptionModel>> options;
 
     public QuizSessionState(Map<QuestionModel, List<OptionModel>> options) {
        this.options = options;
