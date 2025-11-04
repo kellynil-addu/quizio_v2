@@ -108,8 +108,8 @@ public class PlayQuizPageComposer {
         }
 
         PlayQuizPageView playQuizPageView = new PlayQuizPageView(playQuizPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
-        QuizSessionState quizSessionState = new QuizSessionState(questionViewModels.size());
-        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, quizSessionState, questionOptionsMap);
+        QuizSessionState quizSessionState = new QuizSessionState(questionOptionsMap);
+        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, quizSessionState);
 
         quizNavigationController.addSubscriber(playQuizPageController);
 
