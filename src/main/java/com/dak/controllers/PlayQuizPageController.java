@@ -12,32 +12,34 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Map;
 
 public class PlayQuizPageController implements QuizNavigationSubscriber, QuestionSubscriber {
     private final PlayQuizPageView view;
     private final QuizSessionState state;
+    private final Map<QuestionModel, List<OptionModel>> options;
 
-    public PlayQuizPageController(List<QuestionModel> questionModels, PlayQuizPageView playQuizPageView, QuizSessionState quizSessionState) {
-        this.questionModels = questionModels;
-        this.playQuizPageView = playQuizPageView;
-        this.quizSessionState = quizSessionState;
+    public PlayQuizPageController(PlayQuizPageView view, QuizSessionState state, Map<QuestionModel, List<OptionModel>> options) {
+        this.view = view;
+        this.state = state;
+        this.options = options;
     }
 
-    public List<QuestionModel> getQuestionModels() {
-        return questionModels;
+    public PlayQuizPageView getView() {
+        return view;
     }
 
-    public PlayQuizPageView getPlayQuizPageView() {
-        return playQuizPageView;
+    public QuizSessionState getState() {
+        return state;
     }
 
-    public QuizSessionState getQuizSessionState() {
-        return quizSessionState;
+    public Map<QuestionModel, List<OptionModel>> getOptions() {
+        return options;
     }
 
     private void showCurrentPage(int currentPage) {
-        CardLayout cardLayout = (CardLayout) playQuizPageView.getCardPanel().getLayout();
-        cardLayout.show(playQuizPageView.getCardPanel(), String.valueOf(currentPage - 1));
+        CardLayout cardLayout = (CardLayout) view.getCardPanel().getLayout();
+        cardLayout.show(view.getCardPanel(), String.valueOf(currentPage));
     }
 
     @Override
