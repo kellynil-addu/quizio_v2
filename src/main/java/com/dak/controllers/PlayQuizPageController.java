@@ -1,6 +1,6 @@
 package com.dak.controllers;
 
-import com.dak.events.subscribers.NewReleaseItemSubscriber;
+import com.dak.events.subscribers.QuestionSubscriber;
 import com.dak.events.subscribers.QuizNavigationSubscriber;
 import com.dak.states.QuizNavigationState;
 import com.dak.states.QuizSessionState;
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
-public class PlayQuizPageController implements QuizNavigationSubscriber {
+public class PlayQuizPageController implements QuizNavigationSubscriber, QuestionSubscriber {
     private final PlayQuizPageView view;
     private final QuizSessionState state;
 
@@ -39,5 +39,10 @@ public class PlayQuizPageController implements QuizNavigationSubscriber {
     @Override
     public void onPrevious(@NotNull QuizNavigationState state) {
         showCurrentPage(state.currentPage);
+    }
+
+    @Override
+    public void onInput() {
+        System.out.println("Input!");
     }
 }
