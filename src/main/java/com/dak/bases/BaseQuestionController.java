@@ -30,7 +30,7 @@ public class BaseQuestionController<TView> extends EventPublisher<QuestionSubscr
     @Override
     protected void notifyHandler(QuestionSubscriber subscriber, QuestionEvent event) {
         if (event == QuestionEvent.INPUT) {
-            subscriber.onInput(answer, model.getType());
+            subscriber.onInput(answer, model);
         } else {
             throw new IllegalArgumentException("Unhandled event case: " + event);
         }

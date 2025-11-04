@@ -3,6 +3,7 @@ package com.dak.controllers;
 import com.dak.enums.QuestionType;
 import com.dak.events.subscribers.QuestionSubscriber;
 import com.dak.events.subscribers.QuizNavigationSubscriber;
+import com.dak.models.QuestionModel;
 import com.dak.states.QuizNavigationState;
 import com.dak.states.QuizSessionState;
 import com.dak.views.*;
@@ -43,7 +44,7 @@ public class PlayQuizPageController implements QuizNavigationSubscriber, Questio
     }
 
     @Override
-    public void onInput(String answer, QuestionType type) {
+    public void onInput(String answer, QuestionModel model) {
         System.out.println(answer);
     }
 }
