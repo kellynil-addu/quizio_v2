@@ -1,22 +1,20 @@
 package com.dak.controllers;
 
+import com.dak.bases.BaseQuestionController;
 import com.dak.models.QuestionModel;
 import com.dak.views.MultiSelectView;
 
-public class MultiSelectController {
-    private final QuestionModel model;
-    private final MultiSelectView view;
+import java.awt.event.ActionListener;
 
+public class MultiSelectController extends BaseQuestionController<MultiSelectView> {
     public MultiSelectController(QuestionModel model, MultiSelectView view) {
-        this.model = model;
-        this.view = view;
-    }
+        super(model, view);
 
-    public QuestionModel getModel() {
-        return model;
-    }
+        ActionListener actionListener = createComponentActionListener();
 
-    public MultiSelectView getView() {
-        return view;
+        view.getOptionOne().addActionListener(actionListener);
+        view.getOptionTwo().addActionListener(actionListener);
+        view.getOptionThree().addActionListener(actionListener);
+        view.getOptionFour().addActionListener(actionListener);
     }
 }

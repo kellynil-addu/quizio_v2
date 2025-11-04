@@ -1,22 +1,18 @@
 package com.dak.controllers;
 
+import com.dak.bases.BaseQuestionController;
 import com.dak.models.QuestionModel;
 import com.dak.views.TrueOrFalseView;
 
-public class TrueOrFalseController {
-    private final QuestionModel model;
-    private final TrueOrFalseView view;
+import java.awt.event.ActionListener;
 
+public class TrueOrFalseController extends BaseQuestionController<TrueOrFalseView> {
     public TrueOrFalseController(QuestionModel model, TrueOrFalseView view) {
-        this.model = model;
-        this.view = view;
-    }
+        super(model, view);
 
-    public QuestionModel getModel() {
-        return model;
-    }
+        ActionListener actionListener = createComponentActionListener();
 
-    public TrueOrFalseView getView() {
-        return view;
+        view.getTrueButton().addActionListener(actionListener);
+        view.getFalseButton().addActionListener(actionListener);
     }
 }
