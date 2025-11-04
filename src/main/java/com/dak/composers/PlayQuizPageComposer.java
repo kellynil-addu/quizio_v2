@@ -4,6 +4,7 @@ import com.dak.bases.BaseQuestionController;
 import com.dak.bases.BaseQuestionView;
 import com.dak.constants.AppConstants;
 import com.dak.controllers.*;
+import com.dak.enums.QuestionType;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
 import com.dak.states.QuizNavigationState;
@@ -35,14 +36,14 @@ public class PlayQuizPageComposer {
             BaseQuestionController<?> questionController;
 
             switch (questionModel.getType()) {
-                case QuestionModel.TYPE.FILL_IN_THE_BLANK -> {
+                case QuestionType.FILL_IN_THE_BLANK -> {
                     FillInTheBlankView fillInTheBlankView = new FillInTheBlankView();
                     FillInTheBlankController fillInTheBlankController = new FillInTheBlankController(questionModel, fillInTheBlankView);
 
                     questionView = fillInTheBlankView;
                     questionController = fillInTheBlankController;
                 }
-                case QuestionModel.TYPE.MULTIPLE_CHOICE -> {
+                case QuestionType.MULTIPLE_CHOICE -> {
                     List<OptionModel> optionModels = OptionModel.findManyByQuestionId(questionModel.getId());
                     String[] optionTexts = optionModels.stream().map(OptionModel::getText).toArray(String[]::new);
 
@@ -53,7 +54,7 @@ public class PlayQuizPageComposer {
                     questionView = multipleChoiceView;
                     questionController = multipleChoiceController;
                 }
-                case QuestionModel.TYPE.MULTI_SELECT -> {
+                case QuestionType.MULTI_SELECT -> {
                     List<OptionModel> optionModels = OptionModel.findManyByQuestionId(questionModel.getId());
                     String[] optionTexts = optionModels.stream().map(OptionModel::getText).toArray(String[]::new);
 
@@ -64,7 +65,7 @@ public class PlayQuizPageComposer {
                     questionView = multiSelectView;
                     questionController = multiSelectController;
                 }
-                case QuestionModel.TYPE.TRUE_OR_FALSE -> {
+                case QuestionType.TRUE_OR_FALSE -> {
                     TrueOrFalseView trueOrFalseView = new TrueOrFalseView();
                     TrueOrFalseController trueOrFalseController = new TrueOrFalseController(questionModel, trueOrFalseView);
 

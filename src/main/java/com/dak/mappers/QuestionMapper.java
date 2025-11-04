@@ -1,6 +1,7 @@
 package com.dak.mappers;
 
 import com.dak.db.tables.QuestionTable;
+import com.dak.enums.QuestionType;
 import com.dak.models.QuestionModel;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +16,7 @@ public class QuestionMapper {
         return new QuestionModel(
             UUID.fromString(resultSet.getString(QuestionTable.ID)),
             UUID.fromString(resultSet.getString(QuestionTable.QUIZ_ID)),
-            QuestionModel.TYPE.valueOf(resultSet.getString(QuestionTable.TYPE)),
+            QuestionType.valueOf(resultSet.getString(QuestionTable.TYPE)),
             resultSet.getString(QuestionTable.TEXT)
         );
     }

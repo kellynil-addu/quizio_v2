@@ -2,6 +2,7 @@ package com.dak.models;
 
 import com.dak.db.Database;
 import com.dak.db.tables.QuestionTable;
+import com.dak.enums.QuestionType;
 import com.dak.mappers.QuestionMapper;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,17 +18,10 @@ public class QuestionModel {
     private final UUID id;
     private final UUID quizId;
 
-    private TYPE type;
+    private QuestionType type;
     private String text;
 
-    public static enum TYPE {
-        FILL_IN_THE_BLANK,
-        MULTI_SELECT,
-        MULTIPLE_CHOICE,
-        TRUE_OR_FALSE
-    }
-
-    public QuestionModel(UUID id, UUID quizId, TYPE type, String text) {
+    public QuestionModel(UUID id, UUID quizId, QuestionType type, String text) {
         this.id = id;
         this.quizId = quizId;
         this.type = type;
@@ -42,7 +36,7 @@ public class QuestionModel {
         return quizId;
     }
 
-    public TYPE getType() {
+    public QuestionType getType() {
         return type;
     }
 
