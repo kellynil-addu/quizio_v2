@@ -4,6 +4,7 @@ import com.dak.db.Database;
 import com.dak.db.tables.OptionTable;
 import com.dak.mappers.OptionMapper;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,6 +40,30 @@ public class OptionModel {
 
     public String getText() {
         return text;
+    }
+
+    public static @Nullable OptionModel findOneByQuestionId(@NotNull UUID id) {
+        String sql = String.format(
+            "SELECT * FROM `%s` WHERE %s = ? LIMIT 1",
+            OptionTable.TABLE_NAME,
+            OptionTable.QUESTION_ID
+        );
+
+        try (Connection conn = Database.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, id.toString());
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return OptionMapper.toModel(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+
+        return null;
     }
 
     public static @NotNull List<OptionModel> findManyByQuestionId(@NotNull UUID id) {
