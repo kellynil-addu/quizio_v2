@@ -23,10 +23,8 @@ public class PlayQuizPageComposer {
         List<QuestionModel> questionModels = QuestionModel.findManyByQuizId(quizId);
 
         QuizNavigationState quizNavigationState = new QuizNavigationState(1, questionModels.size());
-
         QuizNavigationView quizNavigationView = new QuizNavigationView();
         QuizNavigationController quizNavigationController = new QuizNavigationController(quizNavigationView, quizNavigationState);
-
         PlayQuizPageViewModel playQuizPageViewModel = new PlayQuizPageViewModel(quizNavigationView, quizNavigationState);
 
         List<QuestionViewModel> questionViewModels = new ArrayList<>();
@@ -46,11 +44,7 @@ public class PlayQuizPageComposer {
                 }
                 case QuestionModel.TYPE.MULTIPLE_CHOICE -> {
                     List<OptionModel> optionModels = OptionModel.findManyByQuestionId(questionModel.getId());
-
-                    String[] optionTexts = optionModels
-                            .stream()
-                            .map(OptionModel::getText)
-                            .toArray(String[]::new);
+                    String[] optionTexts = optionModels.stream().map(OptionModel::getText).toArray(String[]::new);
 
                     MultipleChoiceViewModel multipleChoiceViewModel = new MultipleChoiceViewModel(optionTexts[0], optionTexts[1], optionTexts[2], optionTexts[3]);
                     MultipleChoiceView multipleChoiceView = new MultipleChoiceView(multipleChoiceViewModel);
@@ -61,11 +55,7 @@ public class PlayQuizPageComposer {
                 }
                 case QuestionModel.TYPE.MULTI_SELECT -> {
                     List<OptionModel> optionModels = OptionModel.findManyByQuestionId(questionModel.getId());
-
-                    String[] optionTexts = optionModels
-                            .stream()
-                            .map(OptionModel::getText)
-                            .toArray(String[]::new);
+                    String[] optionTexts = optionModels.stream().map(OptionModel::getText).toArray(String[]::new);
 
                     MultiSelectViewModel multiSelectViewModel = new MultiSelectViewModel(optionTexts[0], optionTexts[1], optionTexts[2], optionTexts[3]);
                     MultiSelectView multiSelectView = new MultiSelectView(multiSelectViewModel);
@@ -84,7 +74,6 @@ public class PlayQuizPageComposer {
                 default -> throw new IllegalArgumentException("Unhandled question model type: " + questionModel.getType());
             }
 
-            // TODO: Change underline length to answer length.
             String text = questionModel.getText().replace(AppConstants.QUESTION_BLANK_DELIMITER, "__________");
 
             QuestionViewModel questionViewModel = new QuestionViewModel(text, questionView);
@@ -93,9 +82,13 @@ public class PlayQuizPageComposer {
             questionControllers.add(questionController);
         }
 
-        PlayQuizPageView playQuizPageView = new PlayQuizPageView(playQuizPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
-        QuizSessionState quizSessionState = new QuizSessionState(questionViewModels.size());
-        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, quizSessionState);
+        PlayQuizPageView playQuizPageView = new PlayQuizPageView(
+                playQuizPageViewModel,
+                questionViewModels.toArray(QuestionViewModel[]::new)
+        );
+
+        QuizSessionState quizSessionState = new QuizSessionState();
+        PlayQuizPageController playQuizPageController = new PlayQuizPageController(questionModels, playQuizPageView, quizSessionState);
 
         quizNavigationController.addSubscriber(playQuizPageController);
 
