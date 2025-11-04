@@ -1,7 +1,8 @@
 package com.dak.composers;
 
+import com.dak.bases.BaseQuestionController;
+import com.dak.bases.BaseQuestionView;
 import com.dak.constants.AppConstants;
-import com.dak.contracts.QuestionInputContract;
 import com.dak.controllers.*;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
@@ -29,16 +30,19 @@ public class PlayQuizPageComposer {
         PlayQuizPageViewModel playQuizPageViewModel = new PlayQuizPageViewModel(quizNavigationView, quizNavigationState);
 
         List<QuestionViewModel> questionViewModels = new ArrayList<>();
+        List<BaseQuestionController<?>> questionControllers = new ArrayList<>();
 
         for (QuestionModel questionModel : questionModels) {
-            QuestionInputContract questionInputView;
+            BaseQuestionView questionView;
+            BaseQuestionController<?> questionController;
 
             switch (questionModel.getType()) {
                 case QuestionModel.TYPE.FILL_IN_THE_BLANK -> {
                     FillInTheBlankView fillInTheBlankView = new FillInTheBlankView();
-                    new FillInTheBlankController(questionModel, fillInTheBlankView);
+                    FillInTheBlankController fillInTheBlankController = new FillInTheBlankController(questionModel, fillInTheBlankView);
 
-                    questionInputView = fillInTheBlankView;
+                    questionView = fillInTheBlankView;
+                    questionController = fillInTheBlankController;
                 }
                 case QuestionModel.TYPE.MULTIPLE_CHOICE -> {
                     List<OptionModel> optionModels = OptionModel.findManyByQuestionId(questionModel.getId());
@@ -50,9 +54,10 @@ public class PlayQuizPageComposer {
 
                     MultipleChoiceViewModel multipleChoiceViewModel = new MultipleChoiceViewModel(optionTexts[0], optionTexts[1], optionTexts[2], optionTexts[3]);
                     MultipleChoiceView multipleChoiceView = new MultipleChoiceView(multipleChoiceViewModel);
-                    new MultipleChoiceController(questionModel, multipleChoiceView);
+                    MultipleChoiceController multipleChoiceController = new MultipleChoiceController(questionModel, multipleChoiceView);
 
-                    questionInputView = multipleChoiceView;
+                    questionView = multipleChoiceView;
+                    questionController = multipleChoiceController;
                 }
                 case QuestionModel.TYPE.MULTI_SELECT -> {
                     List<OptionModel> optionModels = OptionModel.findManyByQuestionId(questionModel.getId());
@@ -64,15 +69,17 @@ public class PlayQuizPageComposer {
 
                     MultiSelectViewModel multiSelectViewModel = new MultiSelectViewModel(optionTexts[0], optionTexts[1], optionTexts[2], optionTexts[3]);
                     MultiSelectView multiSelectView = new MultiSelectView(multiSelectViewModel);
-                    new MultiSelectController(questionModel, multiSelectView);
+                    MultiSelectController multiSelectController = new MultiSelectController(questionModel, multiSelectView);
 
-                    questionInputView = multiSelectView;
+                    questionView = multiSelectView;
+                    questionController = multiSelectController;
                 }
                 case QuestionModel.TYPE.TRUE_OR_FALSE -> {
                     TrueOrFalseView trueOrFalseView = new TrueOrFalseView();
-                    new TrueOrFalseController(questionModel, trueOrFalseView);
+                    TrueOrFalseController trueOrFalseController = new TrueOrFalseController(questionModel, trueOrFalseView);
 
-                    questionInputView = trueOrFalseView;
+                    questionView = trueOrFalseView;
+                    questionController = trueOrFalseController;
                 }
                 default -> throw new IllegalArgumentException("Unhandled question model type: " + questionModel.getType());
             }
@@ -80,8 +87,10 @@ public class PlayQuizPageComposer {
             // TODO: Change underline length to answer length.
             String text = questionModel.getText().replace(AppConstants.QUESTION_BLANK_DELIMITER, "__________");
 
-            QuestionViewModel questionViewModel = new QuestionViewModel(text, questionInputView);
+            QuestionViewModel questionViewModel = new QuestionViewModel(text, questionView);
+
             questionViewModels.add(questionViewModel);
+            questionControllers.add(questionController);
         }
 
         PlayQuizPageView playQuizPageView = new PlayQuizPageView(playQuizPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
@@ -89,6 +98,10 @@ public class PlayQuizPageComposer {
         PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, quizSessionState);
 
         quizNavigationController.addSubscriber(playQuizPageController);
+
+        for (BaseQuestionController<?> questionController : questionControllers) {
+            questionController.addSubscriber(playQuizPageController);
+        }
 
         return playQuizPageView;
     }
