@@ -156,9 +156,9 @@ INSERT INTO `question`(`id`, `quiz_id`, `type`, `text`) VALUES
 -- Option
 
 INSERT INTO `option`(`id`, `question_id`, `is_correct`, `text`) VALUES
-(UUID(), @id_question1, NULl, 'final'),
+(UUID(), @id_question1, NULL, 'final'),
 
-(UUID(), @id_question2, NULl, '@Override'),
+(UUID(), @id_question2, NULL, '@Override'),
 
 (UUID(), @id_question3, FALSE, 'Inheritance'),
 (UUID(), @id_question3, FALSE, 'Encapsulation'),
