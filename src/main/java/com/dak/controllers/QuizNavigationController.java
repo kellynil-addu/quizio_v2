@@ -62,7 +62,7 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
 
     private @NotNull ActionListener createFinishButtonActionListener() {
         return (e) -> {
-            System.out.println("Finish!");
+            notifySubscribers(QuizNavigationEvent.FINISH);
         };
     }
 
@@ -73,6 +73,7 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
         switch (event) {
             case NEXT -> subscriber.onNext(state);
             case PREVIOUS -> subscriber.onPrevious(state);
+            case FINISH -> subscriber.onFinish();
             default -> throw new IllegalArgumentException("Unhandled event case: " + event);
         }
     }

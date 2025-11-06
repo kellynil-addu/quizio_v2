@@ -117,6 +117,8 @@ public class PlayQuizPageComposer {
             questionController.addSubscriber(playQuizPageController);
         }
 
+        quizNavigationController.addSubscriber(questionControllers.getLast());
+
         return playQuizPageView;
     }
 }

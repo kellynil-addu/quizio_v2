@@ -3,6 +3,7 @@ package com.dak.bases;
 import com.dak.events.EventPublisher;
 import com.dak.events.enums.QuestionEvent;
 import com.dak.events.subscribers.QuestionSubscriber;
+import com.dak.events.subscribers.QuizNavigationSubscriber;
 import com.dak.models.QuestionModel;
 import com.dak.views.MultiSelectView;
 import org.jetbrains.annotations.NotNull;
@@ -16,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseQuestionController<TView extends BaseQuestionView> extends EventPublisher<QuestionSubscriber, QuestionEvent> {
+public class BaseQuestionController<TView extends BaseQuestionView> extends EventPublisher<QuestionSubscriber, QuestionEvent> implements QuizNavigationSubscriber {
     private final QuestionModel model;
     private final TView view;
 
@@ -25,6 +26,11 @@ public class BaseQuestionController<TView extends BaseQuestionView> extends Even
     public BaseQuestionController(QuestionModel model, TView view) {
         this.model = model;
         this.view = view;
+    }
+
+    @Override
+    public void onFinish() {
+        System.out.println("Reacted to finish event!");
     }
 
     @Override
