@@ -104,19 +104,19 @@ public class ColorSet {
         return selectedOptionAccent;
     }
 
-    public static Color incorrectOptionBackground() {
+    public static Color getIncorrectOptionBackground() {
         return incorrectOptionBackground;
     }
 
-    public static Color incorrectOptionAccent() {
+    public static Color getIncorrectOptionAccent() {
         return incorrectOptionAccent;
     }
 
-    public static Color correctOptionBackground() {
+    public static Color getCorrectOptionBackground() {
         return correctOptionBackground;
     }
 
-    public static Color correctOptionAccent() {
+    public static Color getCorrectOptionAccent() {
         return correctOptionAccent;
     }
 }
