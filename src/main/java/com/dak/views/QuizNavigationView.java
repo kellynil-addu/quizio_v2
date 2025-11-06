@@ -8,6 +8,7 @@ import java.awt.*;
 public class QuizNavigationView extends JPanel {
     private final JButton previousButton;
     private final JButton nextButton;
+    private final JButton finishButton;
 
     public QuizNavigationView() {
         setOpaque(false);
@@ -15,6 +16,7 @@ public class QuizNavigationView extends JPanel {
 
         previousButton = new UnderlineButton("Previous Question");
         nextButton = new JButton("Next Question");
+        finishButton = new JButton("Finish Quiz");
 
         add(previousButton, BorderLayout.WEST);
         add(nextButton, BorderLayout.EAST);
@@ -26,5 +28,15 @@ public class QuizNavigationView extends JPanel {
 
     public JButton getNextButton() {
         return nextButton;
+    }
+
+    public JButton getFinishButton() {
+        return finishButton;
+    }
+
+    public void displaySecondButton(JButton button) {
+        remove(nextButton);
+        remove(finishButton);
+        add(button, BorderLayout.EAST);
     }
 }

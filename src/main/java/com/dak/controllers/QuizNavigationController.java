@@ -19,6 +19,7 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
 
         view.getPreviousButton().addActionListener(createPreviousButtonActionListener());
         view.getNextButton().addActionListener(createNextButtonActionListener());
+        view.getFinishButton().addActionListener(createFinishButtonActionListener());
     }
 
     public QuizNavigationView getView() {
@@ -27,6 +28,14 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
 
     public QuizNavigationState getState() {
         return state;
+    }
+
+    private void showSecondButton() {
+        if (state.currentPage == state.maxPage) {
+            view.displaySecondButton(view.getFinishButton());
+        } else {
+            view.displaySecondButton(view.getNextButton());
+        }
     }
 
     private @NotNull ActionListener createPreviousButtonActionListener() {
@@ -51,8 +60,16 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
         };
     }
 
+    private @NotNull ActionListener createFinishButtonActionListener() {
+        return (e) -> {
+            System.out.println("Finish!");
+        };
+    }
+
     @Override
     protected void notifyHandler(QuizNavigationSubscriber subscriber, @NotNull QuizNavigationEvent event) {
+        showSecondButton();
+
         switch (event) {
             case NEXT -> subscriber.onNext(state);
             case PREVIOUS -> subscriber.onPrevious(state);
