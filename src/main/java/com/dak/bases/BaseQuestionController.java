@@ -16,7 +16,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseQuestionController<TView> extends EventPublisher<QuestionSubscriber, QuestionEvent> {
+public class BaseQuestionController<TView extends BaseQuestionView> extends EventPublisher<QuestionSubscriber, QuestionEvent> {
     private final QuestionModel model;
     private final TView view;
 
