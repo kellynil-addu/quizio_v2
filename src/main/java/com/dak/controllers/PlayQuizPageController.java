@@ -48,6 +48,11 @@ public class PlayQuizPageController implements QuizNavigationSubscriber, Questio
     }
 
     @Override
+    public void onFinish() {
+        System.out.println("Reacted to finish event!");
+    }
+
+    @Override
     public void onInput(String answer, @NotNull QuestionModel model) {
         List<OptionModel> optionModels = state.optionsMap.get(model);
 

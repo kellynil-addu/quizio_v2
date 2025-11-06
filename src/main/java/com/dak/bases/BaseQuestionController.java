@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseQuestionController<TView extends BaseQuestionView> extends EventPublisher<QuestionSubscriber, QuestionEvent> implements QuizNavigationSubscriber {
+public class BaseQuestionController<TView extends BaseQuestionView> extends EventPublisher<QuestionSubscriber, QuestionEvent> {
     private final QuestionModel model;
     private final TView view;
 
@@ -26,11 +26,6 @@ public class BaseQuestionController<TView extends BaseQuestionView> extends Even
     public BaseQuestionController(QuestionModel model, TView view) {
         this.model = model;
         this.view = view;
-    }
-
-    @Override
-    public void onFinish() {
-        System.out.println("Reacted to finish event!");
     }
 
     @Override
