@@ -1,5 +1,7 @@
 package com.dak.events.subscribers;
 
-public interface PlayQuizPageSubscriber {
+import com.dak.events.EventSubscriber;
+
+public interface PlayQuizPageSubscriber extends EventSubscriber {
     default void onFinish() {}
 }
