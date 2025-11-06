@@ -11,7 +11,9 @@ public abstract class EventPublisher<TSubscriber extends EventSubscriber, TEvent
     }
 
     public void addSubscriber(TSubscriber subscriber) {
-        subscribers.add(subscriber);
+        if (!subscribers.contains(subscriber)) {
+            subscribers.add(subscriber);
+        }
     }
 
     public void removeSubscriber(TSubscriber subscriber) {
