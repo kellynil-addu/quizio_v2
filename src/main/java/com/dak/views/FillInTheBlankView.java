@@ -36,6 +36,16 @@ public class FillInTheBlankView extends BaseQuestionView {
         return textField;
     }
 
+    private void displayTextFieldResult(boolean correct) {
+        textField.setBackground(correct
+                ? ColorSet.getCorrectOptionBackground()
+                : ColorSet.getIncorrectOptionBackground());
+
+        textField.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(correct
+                ? ColorSet.getCorrectOptionAccent()
+                : ColorSet.getIncorrectOptionAccent()), textField.getBorder()));
+    }
+
     @Override
     public void disableInput() {
         textField.setEditable(false);
@@ -45,18 +55,10 @@ public class FillInTheBlankView extends BaseQuestionView {
     @Override
     public void displayAnswerResult(List<OptionModel> options, Map<OptionModel, Boolean> resultMap) {
         if (resultMap == null) {
-            textField.setBackground(ColorSet.getIncorrectOptionBackground());
-            textField.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(ColorSet.getIncorrectOptionAccent()), textField.getBorder()));
+            displayTextFieldResult(false);
             return;
         }
 
-        Map.Entry<OptionModel, Boolean> entry = resultMap.entrySet().iterator().next();
-        Boolean value = entry.getValue();
-
-        Color backgroundColor = value ? ColorSet.getCorrectOptionBackground() : ColorSet.getIncorrectOptionBackground();
-        Color borderColor = value ? ColorSet.getCorrectOptionAccent() : ColorSet.getIncorrectOptionAccent();
-
-        textField.setBackground(backgroundColor);
-        textField.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(borderColor), textField.getBorder()));
+        displayTextFieldResult(resultMap.entrySet().iterator().next().getValue());
     }
 }

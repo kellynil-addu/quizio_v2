@@ -81,41 +81,44 @@ public class TrueOrFalseView extends BaseQuestionView {
         return panel;
     }
 
+    private void displayButtonResult(@NotNull JRadioButton button, boolean correct) {
+        button.setOpaque(true);
+
+        button.setBackground(correct
+                ? ColorSet.getCorrectOptionBackground()
+                : ColorSet.getIncorrectOptionBackground());
+
+        ((JPanel) button.getParent()).setBorder(BorderFactory.createLineBorder(correct
+                ? ColorSet.getCorrectOptionAccent()
+                : ColorSet.getIncorrectOptionAccent()));
+    }
+
     @Override
     public void disableInput() {
         disableButtonsInput(List.of(trueButton, falseButton));
     }
 
     @Override
-    public void displayAnswerResult(List<OptionModel> options, Map<OptionModel, Boolean> resultMap) {
+    public void displayAnswerResult(@NotNull List<OptionModel> options, Map<OptionModel, Boolean> resultMap) {
+        OptionModel correctOption = options
+                .stream()
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Correct option is not provided"));
+
+        JRadioButton target = correctOption.isCorrect() ? trueButton : falseButton;
+
         if (resultMap == null) {
-            JRadioButton correctButton = options.getFirst().isCorrect() ? trueButton : falseButton;
-
-            correctButton.setOpaque(true);
-            correctButton.setBackground(ColorSet.getIncorrectOptionBackground());
-            ((JPanel) correctButton.getParent()).setBorder(BorderFactory.createLineBorder(ColorSet.getIncorrectOptionAccent()));
-
+            displayButtonResult(target, false);
             return;
         }
 
         Map.Entry<OptionModel, Boolean> entry = resultMap.entrySet().iterator().next();
-        OptionModel key = entry.getKey();
-        Boolean value = entry.getValue();
 
-        JRadioButton targetButton = key.isCorrect() ? trueButton : falseButton;
-        Color correctBackgroundColor = value ? ColorSet.getCorrectOptionBackground() : ColorSet.getIncorrectOptionBackground();
-        Color correctBorderColor = value ? ColorSet.getCorrectOptionAccent() : ColorSet.getIncorrectOptionAccent();
-
-        targetButton.setOpaque(true);
-        targetButton.setBackground(correctBackgroundColor);
-        ((JPanel) targetButton.getParent()).setBorder(BorderFactory.createLineBorder(correctBorderColor));
-
-        if (!value) {
-            JRadioButton correctButton = key.isCorrect() ? falseButton : trueButton;
-
-            correctButton.setOpaque(true);
-            correctButton.setBackground(ColorSet.getCorrectOptionBackground());
-            ((JPanel) correctButton.getParent()).setBorder(BorderFactory.createLineBorder(ColorSet.getCorrectOptionAccent()));
+        if (entry.getValue()) {
+            displayButtonResult(target, true);
+        } else {
+            displayButtonResult(target, false);
+            displayButtonResult(correctOption.isCorrect() ? falseButton : trueButton, true);
         }
     }
 }
