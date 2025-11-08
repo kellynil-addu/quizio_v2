@@ -3,6 +3,7 @@ package com.dak.bases;
 import com.dak.events.EventPublisher;
 import com.dak.events.enums.QuestionEvent;
 import com.dak.events.subscribers.QuestionSubscriber;
+import com.dak.events.subscribers.QuizSessionSubscriber;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
 import com.dak.views.MultiSelectView;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class BaseQuestionController<TView extends BaseQuestionView> extends EventPublisher<QuestionSubscriber, QuestionEvent> {
+public class BaseQuestionController<TView extends BaseQuestionView> extends EventPublisher<QuestionSubscriber, QuestionEvent> implements QuizSessionSubscriber {
     private final QuestionModel model;
     private final List<OptionModel> options;
     private final TView view;
@@ -31,12 +32,9 @@ public class BaseQuestionController<TView extends BaseQuestionView> extends Even
         this.view = view;
     }
 
-    public QuestionModel getModel() {
-        return model;
-    }
-
-    public void showAnswerResult(Map<OptionModel, Boolean> resultMap) {
-        view.handleAnswerResult(options, resultMap);
+    @Override
+    public void onComplete(@NotNull Map<QuestionModel, Map<OptionModel, Boolean>> answersMap) {
+        view.handleAnswerResult(options, answersMap.get(model));
     }
 
     @Override

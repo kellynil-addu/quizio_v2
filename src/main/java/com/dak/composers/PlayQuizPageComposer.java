@@ -8,6 +8,7 @@ import com.dak.enums.QuestionType;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
 import com.dak.dtos.QuizNavigationDTO;
+import com.dak.states.QuizSessionState;
 import com.dak.views.*;
 import com.dak.views.viewModels.MultiSelectViewModel;
 import com.dak.views.viewModels.MultipleChoiceViewModel;
@@ -29,9 +30,11 @@ public class PlayQuizPageComposer {
         PlayQuizPageViewModel playQuizPageViewModel = new PlayQuizPageViewModel(quizNavigationView, quizNavigationDTO);
 
         List<QuestionViewModel> questionViewModels = new ArrayList<>();
-        List<BaseQuestionController<?>> questionControllers = new ArrayList<>();
 
         Map<QuestionModel, List<OptionModel>> questionOptionsMap = new HashMap<>();
+
+        QuizSessionState quizSessionState = new QuizSessionState(questionOptionsMap);
+        quizNavigationController.addSubscriber(quizSessionState);
 
         for (QuestionModel questionModel : questionModels) {
             BaseQuestionView questionView;
@@ -103,17 +106,14 @@ public class PlayQuizPageComposer {
             QuestionViewModel questionViewModel = new QuestionViewModel(text, questionView);
 
             questionViewModels.add(questionViewModel);
-            questionControllers.add(questionController);
+            quizSessionState.addSubscriber(questionController);
+            questionController.addSubscriber(quizSessionState);
         }
 
         PlayQuizPageView playQuizPageView = new PlayQuizPageView(playQuizPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
-        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, questionControllers, questionOptionsMap);
+        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView);
 
         quizNavigationController.addSubscriber(playQuizPageController);
-
-        for (BaseQuestionController<?> questionController : questionControllers) {
-            questionController.addSubscriber(playQuizPageController);
-        }
 
         return playQuizPageView;
     }
