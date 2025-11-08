@@ -100,15 +100,13 @@ public class MultiSelectView extends BaseQuestionView {
     public void displayAnswerResult(List<OptionModel> options, Map<OptionModel, Boolean> resultMap) {
         List<JCheckBox> checkBoxes = List.of(optionOne, optionTwo, optionThree, optionFour);
 
-        IllegalStateException noModelAndCheckboxError =  new IllegalStateException("OptionModel does not have a corresponding JCheckBox");
-
         if (resultMap == null) {
             JCheckBox[] correctOptions = options.stream()
                     .filter(OptionModel::isCorrect)
                     .map(o -> checkBoxes.stream()
                             .filter(c -> c.getText().equals(o.getText()))
                             .findFirst()
-                            .orElseThrow(() -> noModelAndCheckboxError))
+                            .orElseThrow())
                     .toArray(JCheckBox[]::new);
 
             for (JCheckBox correctOption : correctOptions) {
@@ -122,7 +120,7 @@ public class MultiSelectView extends BaseQuestionView {
             JCheckBox checkBox = checkBoxes.stream()
                     .filter(c -> c.getText().equals(option.getText()))
                     .findFirst()
-                    .orElseThrow(() -> noModelAndCheckboxError);
+                    .orElseThrow();
 
             displayCheckBoxResult(checkBox, isCorrect);
         });

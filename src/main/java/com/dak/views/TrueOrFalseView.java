@@ -103,7 +103,7 @@ public class TrueOrFalseView extends BaseQuestionView {
         OptionModel correctOption = options
                 .stream()
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Correct option is not provided"));
+                .orElseThrow();
 
         JRadioButton target = correctOption.isCorrect() ? trueButton : falseButton;
 
