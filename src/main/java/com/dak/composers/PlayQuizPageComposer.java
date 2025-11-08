@@ -7,7 +7,7 @@ import com.dak.controllers.*;
 import com.dak.enums.QuestionType;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
-import com.dak.states.QuizNavigationState;
+import com.dak.dtos.QuizNavigationDTO;
 import com.dak.states.QuizSessionState;
 import com.dak.views.*;
 import com.dak.views.viewModels.MultiSelectViewModel;
@@ -22,12 +22,12 @@ public class PlayQuizPageComposer {
     public static @NotNull PlayQuizPageView createPlayQuizPage(String quizId) {
         List<QuestionModel> questionModels = QuestionModel.findManyByQuizId(quizId);
 
-        QuizNavigationState quizNavigationState = new QuizNavigationState(1, questionModels.size());
+        QuizNavigationDTO quizNavigationDTO = new QuizNavigationDTO(1, questionModels.size());
 
         QuizNavigationView quizNavigationView = new QuizNavigationView();
-        QuizNavigationController quizNavigationController = new QuizNavigationController(quizNavigationView, quizNavigationState);
+        QuizNavigationController quizNavigationController = new QuizNavigationController(quizNavigationView, quizNavigationDTO);
 
-        PlayQuizPageViewModel playQuizPageViewModel = new PlayQuizPageViewModel(quizNavigationView, quizNavigationState);
+        PlayQuizPageViewModel playQuizPageViewModel = new PlayQuizPageViewModel(quizNavigationView, quizNavigationDTO);
 
         List<QuestionViewModel> questionViewModels = new ArrayList<>();
         List<BaseQuestionController<?>> questionControllers = new ArrayList<>();

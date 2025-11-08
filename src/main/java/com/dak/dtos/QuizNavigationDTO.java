@@ -1,10 +1,10 @@
-package com.dak.states;
+package com.dak.dtos;
 
-public class QuizNavigationState {
+public class QuizNavigationDTO {
     public int currentPage;
     public int maxPage;
 
-    public QuizNavigationState(int currentPage, int maxPage) {
+    public QuizNavigationDTO(int currentPage, int maxPage) {
         this.currentPage = currentPage;
         this.maxPage = maxPage;
     }

@@ -3,7 +3,7 @@ package com.dak.controllers;
 import com.dak.events.EventPublisher;
 import com.dak.events.enums.QuizNavigationEvent;
 import com.dak.events.subscribers.QuizNavigationSubscriber;
-import com.dak.states.QuizNavigationState;
+import com.dak.dtos.QuizNavigationDTO;
 import com.dak.views.QuizNavigationView;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,27 +11,19 @@ import java.awt.event.ActionListener;
 
 public class QuizNavigationController extends EventPublisher<QuizNavigationSubscriber, QuizNavigationEvent> {
     private final QuizNavigationView view;
-    private final QuizNavigationState state;
+    private final QuizNavigationDTO dto;
 
-    public QuizNavigationController(@NotNull QuizNavigationView view, QuizNavigationState state) {
+    public QuizNavigationController(@NotNull QuizNavigationView view, QuizNavigationDTO dto) {
         this.view = view;
-        this.state = state;
+        this.dto = dto;
 
         view.getPreviousButton().addActionListener(createPreviousButtonActionListener());
         view.getNextButton().addActionListener(createNextButtonActionListener());
         view.getFinishButton().addActionListener(createFinishButtonActionListener());
     }
 
-    public QuizNavigationView getView() {
-        return view;
-    }
-
-    public QuizNavigationState getState() {
-        return state;
-    }
-
     private void showSecondButton() {
-        if (state.currentPage == state.maxPage) {
+        if (dto.currentPage == dto.maxPage) {
             view.displaySecondButton(view.getFinishButton());
         } else {
             view.displaySecondButton(view.getNextButton());
@@ -39,31 +31,29 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
     }
 
     private @NotNull ActionListener createPreviousButtonActionListener() {
-        return (e) -> {
-            if (state.currentPage == 1) {
+        return (_) -> {
+            if (dto.currentPage == 1) {
                 return;
             }
 
-            state.currentPage -= 1;
+            dto.currentPage -= 1;
             notifySubscribers(QuizNavigationEvent.PREVIOUS);
         };
     }
 
     private @NotNull ActionListener createNextButtonActionListener() {
-        return (e) -> {
-            if (state.currentPage == state.maxPage) {
+        return (_) -> {
+            if (dto.currentPage == dto.maxPage) {
                 return;
             }
 
-            state.currentPage += 1;
+            dto.currentPage += 1;
             notifySubscribers(QuizNavigationEvent.NEXT);
         };
     }
 
     private @NotNull ActionListener createFinishButtonActionListener() {
-        return (e) -> {
-            notifySubscribers(QuizNavigationEvent.FINISH);
-        };
+        return (_) -> notifySubscribers(QuizNavigationEvent.FINISH);
     }
 
     @Override
@@ -71,8 +61,8 @@ public class QuizNavigationController extends EventPublisher<QuizNavigationSubsc
         showSecondButton();
 
         switch (event) {
-            case NEXT -> subscriber.onNext(state);
-            case PREVIOUS -> subscriber.onPrevious(state);
+            case NEXT -> subscriber.onNext(dto);
+            case PREVIOUS -> subscriber.onPrevious(dto);
             case FINISH -> subscriber.onFinish();
             default -> throw new IllegalArgumentException("Unhandled event case: " + event);
         }

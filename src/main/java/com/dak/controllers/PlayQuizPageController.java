@@ -6,7 +6,7 @@ import com.dak.events.subscribers.QuestionSubscriber;
 import com.dak.events.subscribers.QuizNavigationSubscriber;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
-import com.dak.states.QuizNavigationState;
+import com.dak.dtos.QuizNavigationDTO;
 import com.dak.states.QuizSessionState;
 import com.dak.views.*;
 import org.jetbrains.annotations.NotNull;
@@ -33,13 +33,13 @@ public class PlayQuizPageController implements QuizNavigationSubscriber, Questio
     }
 
     @Override
-    public void onNext(@NotNull QuizNavigationState state) {
-        showCurrentPage(state.currentPage);
+    public void onNext(@NotNull QuizNavigationDTO dto) {
+        showCurrentPage(dto.currentPage);
     }
 
     @Override
-    public void onPrevious(@NotNull QuizNavigationState state) {
-        showCurrentPage(state.currentPage);
+    public void onPrevious(@NotNull QuizNavigationDTO dto) {
+        showCurrentPage(dto.currentPage);
     }
 
     @Override

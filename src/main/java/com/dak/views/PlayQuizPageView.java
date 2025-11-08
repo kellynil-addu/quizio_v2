@@ -66,7 +66,7 @@ public class PlayQuizPageView extends JPanel {
 
         for (int i = 0; i < questionViewModels.length; i++) {
             JLabel pageLabel = createPage();
-            pageLabel.setText(i + 1 + "/" + playQuizPageViewModel.quizNavigationState().maxPage);
+            pageLabel.setText(i + 1 + "/" + playQuizPageViewModel.quizNavigationDTO().maxPage);
 
             panel.add(createQuestion(questionViewModels[i], pageLabel), String.valueOf(i + 1));
         }
