@@ -8,7 +8,6 @@ import com.dak.enums.QuestionType;
 import com.dak.models.OptionModel;
 import com.dak.models.QuestionModel;
 import com.dak.dtos.QuizNavigationDTO;
-import com.dak.states.QuizSessionState;
 import com.dak.views.*;
 import com.dak.views.viewModels.MultiSelectViewModel;
 import com.dak.views.viewModels.MultipleChoiceViewModel;
@@ -108,8 +107,7 @@ public class PlayQuizPageComposer {
         }
 
         PlayQuizPageView playQuizPageView = new PlayQuizPageView(playQuizPageViewModel, questionViewModels.toArray(QuestionViewModel[]::new));
-        QuizSessionState quizSessionState = new QuizSessionState(questionOptionsMap);
-        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, quizSessionState, questionControllers);
+        PlayQuizPageController playQuizPageController = new PlayQuizPageController(playQuizPageView, questionControllers, questionOptionsMap);
 
         quizNavigationController.addSubscriber(playQuizPageController);
 
