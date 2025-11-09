@@ -80,7 +80,7 @@ public class QuizSessionState extends EventPublisher<QuizSessionSubscriber, Quiz
     @Override
     protected void notifyHandler(QuizSessionSubscriber subscriber, QuizSessionEvent event) {
         if (event == COMPLETE) {
-            subscriber.onComplete(answersMap);
+            subscriber.onEnd(answersMap);
         } else {
             throw new IllegalArgumentException("Unhandled event case: " + event);
         }

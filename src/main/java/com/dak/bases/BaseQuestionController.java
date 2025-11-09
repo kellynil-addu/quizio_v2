@@ -33,7 +33,7 @@ public class BaseQuestionController<TView extends BaseQuestionView> extends Even
     }
 
     @Override
-    public void onComplete(@NotNull Map<QuestionModel, Map<OptionModel, Boolean>> answersMap) {
+    public void onEnd(@NotNull Map<QuestionModel, Map<OptionModel, Boolean>> answersMap) {
         view.handleAnswerResult(options, answersMap.get(model));
     }
 

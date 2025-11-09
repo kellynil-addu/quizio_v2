@@ -7,5 +7,5 @@ import com.dak.models.QuestionModel;
 import java.util.Map;
 
 public interface QuizSessionSubscriber extends EventSubscriber {
-    default void onComplete(Map<QuestionModel, Map<OptionModel, Boolean>> answersMap) {}
+    default void onEnd(Map<QuestionModel, Map<OptionModel, Boolean>> answersMap) {}
 }
